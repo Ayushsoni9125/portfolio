@@ -1,16 +1,27 @@
-# React + Vite
+# Ayush Soni | Full-Stack Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, studio-grade personal portfolio built with React 19, Tailwind CSS, and Framer Motion. Featuring a cinematic dark-mode aesthetic, responsive layouts, and a custom background system for project showcases.
 
-Currently, two official plugins are available:
+🚀 **Live Demo:** [https://ayush-indol.vercel.app](https://ayush-indol.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠️ Tech Stack
 
-## React Compiler
+- **Frontend:** React 19, Tailwind CSS, Framer Motion
+- **Icons:** Lucide React
+- **Deployment:** Vercel
+- **Contact Protocol:** EmailJS
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Key Features
 
-## Expanding the ESLint configuration
+- **Cinematic UI:** Custom mesh gradients and dynamic glow orbs for a premium feel.
+- **Project Backgrounds:** AI-generated abstract backgrounds that react to user interaction.
+- **Fully Responsive:** Custom-built mobile navigation drawer and adaptive grid layouts.
+- **Glassmorphism:** Elegant bento-style cards with backdrop blurs and subtle border glows.
+- **Performance:** Optimized assets and production-ready code structure.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📱 Mobile Preview
+
+The site is fully optimized for mobile devices with a custom hamburger menu drawer and stacked layouts for narrow viewports.
+
+---
+Handcrafted with precision by Ayush Soni.
