@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Soni - Resume</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.4;
+            color: #000;
+            margin: 0;
+            padding: 40px 0;
+            background: #f0f0f0; /* Light gray background */
+        }
+        .page-container {
+            width: 210mm; /* A4 Width */
+            min-height: 297mm; /* A4 Height */
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            text-transform: uppercase;
+        }
+        .contact-info {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .section {
+            margin-bottom: 15px;
+        }
+        .section-title {
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #000;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .item {
+            margin-bottom: 10px;
+        }
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+        }
+        .item-sub {
+            display: flex;
+            justify-content: space-between;
+            font-style: italic;
+            font-size: 14px;
+        }
+        ul {
+            margin: 5px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 3px;
+            font-size: 14px;
+        }
+        .skills-grid {
+            font-size: 14px;
+        }
+        .skills-grid b {
+            display: inline-block;
+            width: 100px;
+        }
+        @media print {
+            body { padding: 0; background: #fff; }
+            .page-container { 
+                width: 100%; 
+                box-shadow: none; 
+                padding: 0; 
+                margin: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+    <div class="header">
+        <h1>Ayush Soni</h1>
+        <div class="contact-info">
+            +91-9125327144 | soniayush9125@gmail.com | linkedin.com/in/ayushsoni2005 | github.com/Ayushsoni9125
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Summary</div>
+        <p style="font-size: 14px; margin: 0;">
+            Information Technology undergraduate with hands-on experience in full-stack development. Skilled in building secure, scalable RESTful APIs and responsive web applications using the MERN stack, with a focus on authentication, data integrity, and system reliability.
+        </p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Technical Skills</div>
+        <div class="skills-grid">
+            <div><b>Languages:</b> JavaScript, C/C++, HTML, CSS</div>
+            <div><b>Frameworks:</b> React.js, Node.js, Express.js, Tailwind CSS</div>
+            <div><b>Databases:</b> MongoDB (Mongoose), PostgreSQL</div>
+            <div><b>Tools:</b> Git, GitHub, Postman, Vite, Vercel, Render</div>
+            <div><b>Concepts:</b> REST APIs, JWT Authentication, Role-Based Access Control, Data Structures & Algorithms</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Education</div>
+        <div class="item">
+            <div class="item-header">
+                <div>KIET Group of Institutions</div>
+                <div>Ghaziabad, India</div>
+            </div>
+            <div class="item-sub">
+                <div>B.Tech in Information Technology</div>
+                <div>2024 &ndash; 2028</div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item-header">
+                <div>Dr. Virendra Swarup Public School</div>
+                <div>India</div>
+            </div>
+            <div class="item-sub">
+                <div>Class XII (92%)</div>
+                <div>2023</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Projects</div>
+        <div class="item">
+            <div class="item-header">
+                <div>ShopNow &mdash; Full-Stack MERN E-Commerce App</div>
+                <div>GitHub | Live Demo</div>
+            </div>
+            <ul>
+                <li>Engineered a production-ready e-commerce platform using <b>React 19 (Vite), Node.js, Express.js, MongoDB (Mongoose)</b>, and <b>Axios</b> with a fully decoupled frontend/backend architecture.</li>
+                <li>Implemented <b>JWT authentication</b> with <b>bcryptjs</b> password hashing, supporting secure user registration, login, and protected routes with role-based access for customers and admins.</li>
+                <li>Built a full <b>Admin Dashboard</b> enabling product creation, inventory management, and real-time order tracking with role-based authorization middleware on the backend.</li>
+                <li>Developed a <b>category-based product recommendation engine</b> (&ldquo;You Might Also Like&rdquo;).</li>
+                <li>Deployed frontend on <b>Vercel</b> and REST API on <b>Render</b>, configured via <code>vercel.json</code> with environment-based secrets management for production security.</li>
+            </ul>
+        </div>
+        <div class="item">
+            <div class="item-header">
+                <div>Banking Ledger System</div>
+                <div>Repository</div>
+            </div>
+            <ul>
+                <li>Developed a secure RESTful API for banking operations using Node.js and Express.js.</li>
+                <li>Implemented JWT-based authentication with token blacklisting for secure session management.</li>
+                <li>Designed a double-entry ledger system using MongoDB transactions to ensure data consistency.</li>
+                <li>Built idempotent APIs to prevent duplicate transactions and integrated Nodemailer for email notifications.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Achievements & Leadership</div>
+        <ul>
+            <li><b>HackWave 2.0 Hackathon:</b> Team ranked in <b>Top 10 out of 100+ teams</b>, demonstrating strong collaborative problem-solving and rapid prototyping skills under time constraints.</li>
+            <li><b>AWS Certified AI Practitioner (AIF-C01):</b> Demonstrated understanding of AI/ML concepts and cloud-based AI services on the AWS platform.</li>
+            <li><b>AWS Certified Cloud Practitioner (CLF-C02):</b> Gained foundational knowledge of AWS cloud services, core infrastructure, and architectural best practices.</li>
+            <li><b>Leadership:</b> Actively contributed to technical clubs and collaborated in organizing technical events, hackathons, and workshops for the student community.</li>
+        </ul>
+    </div>
+    </div>
+</body>
+</html>
