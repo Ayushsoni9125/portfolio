@@ -18,12 +18,12 @@ const PROJECTS = [
     bg: "/project_bg_banking.png",
   },
   {
-    title: "Wedding Planner",
-    desc: "A bespoke wedding management platform with guest RSVP, venue booking, and vendor coordination.",
-    tags: ["HTML", "CSS", "JavaScript"],
-    link: "https://ayushsoni9125.github.io/wedding-planner/",
-    git: "https://github.com/Ayushsoni9125/wedding-planner",
-    bg: "/project_bg_wedding.png",
+    title: "Connectify",
+    desc: "A modern, real-time chat application with a sleek glassmorphic UI, WebSocket communication, and secure cookie-based auth.",
+    tags: ["React 19", "Node.js", "Socket.io", "Tailwind CSS"],
+    link: "https://connectify-ayush.vercel.app",
+    git: "https://github.com/Ayushsoni9125/Connectify",
+    bg: "/project_bg_connectify.png",
   },
 ];
 
