@@ -1,3 +1,5 @@
+import profileImg from "../assets/ayush.png";
+
 export default function About() {
   const SKILLS = [
     "React 19", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Tailwind CSS", "JWT Auth", "REST APIs"
@@ -30,11 +32,19 @@ export default function About() {
           </a>
         </div>
 
-        {/* Identity graphic — hidden on small screens to save space */}
-        <div className="relative group perspective-1000 hidden lg:block">
-          <div className="aspect-[4/5] bg-gradient-to-br from-sky-600/10 to-blue-600/5 rounded-[3rem] border border-white/5 flex flex-col items-center justify-center overflow-hidden transition-all duration-700 group-hover:border-sky-500/30 group-hover:shadow-[0_0_50px_rgba(14,165,233,0.1)]">
-            <div className="text-[15rem] font-black text-white/[0.03] select-none group-hover:scale-110 group-hover:text-sky-500/[0.05] transition-all duration-1000">SONI</div>
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(14,165,233,0.1),transparent_70%)]" />
+        {/* Identity graphic with profile photo */}
+        <div className="relative group perspective-1000 w-full max-w-sm mx-auto lg:max-w-none mt-8 lg:mt-0">
+          <div className="aspect-[4/5] bg-gradient-to-br from-sky-600/10 to-blue-600/5 rounded-[3rem] border border-white/5 overflow-hidden transition-all duration-700 group-hover:border-sky-500/30 group-hover:shadow-[0_0_50px_rgba(14,165,233,0.15)] relative">
+            <img 
+              src={profileImg} 
+              alt="Ayush Soni" 
+              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0 contrast-110 brightness-90 hover:brightness-100" 
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80" />
+            <div className="absolute bottom-8 left-8 right-8 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <p className="text-xs uppercase tracking-widest font-semibold text-sky-400">Full-Stack Engineer</p>
+              <h3 className="text-xl font-bold text-white mt-1">Ayush Soni</h3>
+            </div>
           </div>
           <div className="absolute inset-0 bg-sky-600/10 blur-[120px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
         </div>
