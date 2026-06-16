@@ -10,12 +10,12 @@ const PROJECTS = [
     bg: "/project_bg_ecommerce.png",
   },
   {
-    title: "Banking Ledger",
-    desc: "Secure RESTful API for banking with double-entry ledger transactions and idempotent operations.",
-    tags: ["Node.js", "MongoDB Transactions", "JWT"],
-    link: "#",
-    git: "https://github.com/Ayushsoni9125",
-    bg: "/project_bg_banking.png",
+    title: "AI Resume Builder",
+    desc: "Full-stack platform featuring ATS scoring, AI cover letters, resume parsing, matching, and multi-template PDF/Word export.",
+    tags: ["React 19", "Node.js", "MongoDB", "Gemini AI"],
+    link: "https://ats-checker-resume-builder.vercel.app",
+    git: "https://github.com/Ayushsoni9125/resume_builder",
+    bg: "/project_bg_resume.png",
   },
   {
     title: "Connectify",
