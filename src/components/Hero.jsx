@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <section id="home" className="min-h-screen flex flex-col items-center justify-center text-center px-4 sm:px-6 relative">
-      <div className="flex flex-col items-center w-full">
+    <section id="home" className="min-h-screen flex flex-col items-center text-center px-4 sm:px-6 relative pt-24 pb-12 sm:pt-32">
+      <div className="my-auto flex flex-col items-center w-full max-w-7xl mx-auto">
         <div className="tag mb-6 sm:mb-8 animate-float">Full-Stack Engineer</div>
 
         <h1 className="text-6xl sm:text-7xl md:text-[9rem] lg:text-[10rem] font-black tracking-tighter leading-[0.85] mb-8 sm:mb-12 text-center uppercase">

@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="mesh-gradient noise-bg min-h-screen relative overflow-hidden">
+    <div className="mesh-gradient noise-bg min-h-screen relative overflow-x-hidden">
       {/* Dynamic Glow Orbs */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-sky-600/10 blur-[150px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[150px] rounded-full pointer-events-none" />
