@@ -68,7 +68,7 @@ export default function Projects() {
         </div>
 
         {/* Cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
           {PROJECTS.map((project) => (
             <div key={project.title} className="project-card group overflow-hidden">
               {/* Background Image */}
