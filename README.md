@@ -2,7 +2,7 @@
 
 A premium, studio-grade personal portfolio built with React 19, Tailwind CSS, and Framer Motion. Featuring a cinematic dark-mode aesthetic, responsive layouts, and a custom background system for project showcases.
 
-🚀 **Live Demo:** [https://ayushsoni-me.vercel.app](https://ayushsoni-me.vercel.app)
+🚀 **Live Demo:** [https://ayushsoni-me.vercel.app/](https://ayushsoni-me.vercel.app/)
 
 ## 🛠️ Tech Stack
 

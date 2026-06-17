@@ -1,52 +1,97 @@
 import profileImg from "../assets/ayush.png";
 
+const SKILLS = [
+  "React 19", "Node.js", "Express.js", "MongoDB", "PostgreSQL",
+  "Tailwind CSS", "JWT Auth", "REST APIs", "Socket.io", "Gemini AI",
+  "Git/GitHub", "Vercel / Render",
+];
+
 export default function About() {
-  const SKILLS = [
-    "React 19", "Node.js", "Express.js", "MongoDB", "PostgreSQL", "Tailwind CSS", "JWT Auth", "REST APIs"
-  ];
-
   return (
-    <section id="about" className="py-16 sm:py-24">
-      <div className="bento-card grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <div>
-          <h2 className="section-title">The <span className="gradient-text">Engineer</span></h2>
-          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-6 sm:mb-8">
-            I specialize in building secure, scalable RESTful APIs and responsive web applications using the MERN stack.
-            My focus is on architecting robust backend systems and cinematic frontend designs.
-          </p>
-          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-10 sm:mb-12">
-            I prioritize data integrity and system reliability, ensuring that every line of code serves a specific purpose in the production environment.
-          </p>
+    <section id="about" className="py-24 sm:py-32">
+      <div className="section-container">
+        <h2 className="section-heading">About</h2>
+        <span className="accent-bar" />
 
-          <div className="flex flex-wrap gap-2 mb-10 sm:mb-12">
-            {SKILLS.map(skill => (
-              <span key={skill} className="tag">{skill}</span>
-            ))}
+        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+          {/* Text */}
+          <div>
+            <p className="text-lg leading-relaxed mb-5" style={{ color: 'rgba(232,238,255,0.6)' }}>
+              I'm a{' '}
+              <span style={{ color: '#e8eeff', fontWeight: 600 }}>
+                Full-Stack MERN Developer
+              </span>{' '}
+              with a passion for architecting secure, scalable web applications. I specialize
+              in building robust backend systems and crafting cinematic frontend experiences.
+            </p>
+            <p className="text-lg leading-relaxed mb-10" style={{ color: 'rgba(232,238,255,0.6)' }}>
+              I prioritize data integrity and system reliability — ensuring every line of code
+              serves a specific purpose in the production environment. Currently pursuing
+              B.Tech in Information Technology at{' '}
+              <span style={{ color: '#e8eeff', fontWeight: 600 }}>KIET Group of Institutions</span>.
+            </p>
+
+            {/* Skills */}
+            <div className="flex flex-wrap gap-2 mb-10">
+              {SKILLS.map(skill => (
+                <span key={skill} className="skill-tag">{skill}</span>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <a
+              href="/resume-template.html"
+              target="_blank"
+              rel="noreferrer"
+              id="about-resume-btn"
+              className="btn-primary"
+            >
+              View Resume
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
           </div>
 
-          <a href="/resume-template.html" target="_blank" className="btn-primary inline-flex">
-            View Resume
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
-          </a>
-        </div>
-
-        {/* Identity graphic with profile photo */}
-        <div className="relative group perspective-1000 w-full max-w-sm mx-auto lg:max-w-none mt-8 lg:mt-0">
-          <div className="aspect-[4/5] bg-gradient-to-br from-sky-600/10 to-blue-600/5 rounded-[3rem] border border-white/5 overflow-hidden transition-all duration-700 group-hover:border-sky-500/30 group-hover:shadow-[0_0_50px_rgba(14,165,233,0.15)] relative">
-            <img 
-              src={profileImg} 
-              alt="Ayush Soni" 
-              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0 contrast-110 brightness-90 hover:brightness-100" 
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent opacity-80" />
-            <div className="absolute bottom-8 left-8 right-8 transform translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-              <p className="text-xs uppercase tracking-widest font-semibold text-sky-400">Full-Stack Engineer</p>
-              <h3 className="text-xl font-bold text-white mt-1">Ayush Soni</h3>
+          {/* Photo */}
+          <div className="flex justify-center lg:justify-end">
+            <div className="relative">
+              {/* Offset accent border */}
+              <div
+                className="absolute inset-0 rounded-2xl translate-x-3 translate-y-3"
+                style={{ border: '2px solid rgba(59,158,255,0.2)' }}
+              />
+              {/* Image */}
+              <div
+                className="relative w-64 h-72 sm:w-72 sm:h-80 rounded-2xl overflow-hidden"
+                style={{ border: '1px solid rgba(232,238,255,0.08)' }}
+              >
+                <img
+                  src={profileImg}
+                  alt="Ayush Soni"
+                  className="w-full h-full object-cover transition-all duration-700 filter grayscale hover:grayscale-0 scale-105 hover:scale-100"
+                />
+                {/* Gradient overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(7,16,30,0.6) 0%, transparent 60%)',
+                  }}
+                />
+                {/* Label */}
+                <div className="absolute bottom-4 left-4">
+                  <p
+                    className="text-[10px] font-bold uppercase tracking-widest mb-0.5"
+                    style={{ color: '#3b9eff' }}
+                  >
+                    Full-Stack Engineer
+                  </p>
+                  <p className="text-sm font-bold text-white">Ayush Soni</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="absolute inset-0 bg-sky-600/10 blur-[120px] -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
         </div>
       </div>
     </section>
