@@ -8,6 +8,7 @@ const PROJECTS = [
     link: "https://frontend-liart-phi-53.vercel.app",
     git: "https://github.com/Ayushsoni9125/Shop-Now",
     featured: true,
+    bg: "/project_bg_ecommerce.png",
   },
   {
     title: "AI Resume Builder",
@@ -16,6 +17,7 @@ const PROJECTS = [
     link: "https://ats-checker-resume-builder.vercel.app",
     git: "https://github.com/Ayushsoni9125/resume_builder",
     featured: false,
+    bg: "/project_bg_resume.png",
   },
   {
     title: "Connectify",
@@ -24,6 +26,7 @@ const PROJECTS = [
     link: "https://connectify-ayush.vercel.app",
     git: "https://github.com/Ayushsoni9125/Connectify",
     featured: false,
+    bg: "/project_bg_connectify.png",
   },
 ];
 
@@ -67,66 +70,78 @@ export default function Projects() {
         {/* Cards grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {PROJECTS.map((project) => (
-            <div key={project.title} className="project-card group">
-              {/* Card top row */}
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-2">
-                  <h3
-                    className="text-lg font-bold text-white transition-colors duration-200 group-hover:text-blue-400"
-                  >
-                    {project.title}
-                  </h3>
-                  {project.featured && (
-                    <span
-                      className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
-                      style={{
-                        background: 'rgba(59,158,255,0.15)',
-                        color: '#3b9eff',
-                      }}
+            <div key={project.title} className="project-card group overflow-hidden">
+              {/* Background Image */}
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-[0.08] group-hover:opacity-[0.20] transition-all duration-700 scale-100 group-hover:scale-105 pointer-events-none"
+                style={{ backgroundImage: `url(${project.bg})` }}
+              />
+              {/* Dark Overlay */}
+              <div
+                className="absolute inset-0 bg-gradient-to-t from-[#07101e] via-[#07101e]/90 to-[#07101e]/75 transition-all duration-500 pointer-events-none"
+              />
+
+              <div className="relative z-10 flex flex-col h-full">
+                {/* Card top row */}
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex items-center gap-2">
+                    <h3
+                      className="text-lg font-bold text-white transition-colors duration-200 group-hover:text-blue-400"
                     >
-                      Featured
-                    </span>
-                  )}
+                      {project.title}
+                    </h3>
+                    {project.featured && (
+                      <span
+                        className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
+                        style={{
+                          background: 'rgba(59,158,255,0.15)',
+                          color: '#3b9eff',
+                        }}
+                      >
+                        Featured
+                      </span>
+                    )}
+                  </div>
+                  <a
+                    href={project.git}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`${project.title} GitHub`}
+                    className="transition-colors duration-200 ml-2 shrink-0"
+                    style={{ color: 'rgba(232,238,255,0.25)' }}
+                    onMouseOver={e => e.currentTarget.style.color = 'rgba(232,238,255,0.8)'}
+                    onMouseOut={e => e.currentTarget.style.color = 'rgba(232,238,255,0.25)'}
+                  >
+                    <GitHubIcon />
+                  </a>
                 </div>
+
+                {/* Description */}
+                <p
+                  className="text-sm leading-relaxed mb-5 flex-1"
+                  style={{ color: 'rgba(232,238,255,0.45)' }}
+                >
+                  {project.desc}
+                </p>
+
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+
+                {/* Live link */}
                 <a
-                  href={project.git}
+                  href={project.link}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={`${project.title} GitHub`}
-                  className="transition-colors duration-200 ml-2 shrink-0"
-                  style={{ color: 'rgba(232,238,255,0.25)' }}
-                  onMouseOver={e => e.currentTarget.style.color = 'rgba(232,238,255,0.8)'}
-                  onMouseOut={e => e.currentTarget.style.color = 'rgba(232,238,255,0.25)'}
+                  className="inline-flex items-center gap-1 text-sm font-bold transition-all duration-200"
+                  style={{ color: '#3b9eff' }}
                 >
-                  <GitHubIcon />
+                  Live Demo <ArrowUpRight size={15} />
                 </a>
               </div>
-
-              {/* Description */}
-              <p
-                className="text-sm leading-relaxed mb-5 flex-1"
-                style={{ color: 'rgba(232,238,255,0.45)' }}
-              >
-                {project.desc}
-              </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-5">
-                {project.tags.map(tag => (
-                  <span key={tag} className="tag">{tag}</span>
-                ))}
-              </div>
-
-              {/* Live link */}
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-bold transition-all duration-200"
-                style={{ color: '#3b9eff' }}
-              >
-                Live Demo <ArrowUpRight size={15} />
-              </a>
             </div>
           ))}
         </div>
