@@ -56,15 +56,15 @@ export default function About() {
 
           {/* Photo */}
           <div className="flex justify-center lg:justify-end">
-            <div className="relative">
+            <div className="relative w-64 h-72 sm:w-72 sm:h-80 group">
               {/* Offset accent border */}
               <div
-                className="absolute inset-0 rounded-2xl translate-x-3 translate-y-3"
+                className="absolute inset-0 rounded-2xl translate-x-1.5 translate-y-1.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5"
                 style={{ border: '2px solid rgba(59,158,255,0.2)' }}
               />
               {/* Image */}
               <div
-                className="relative w-64 h-72 sm:w-72 sm:h-80 rounded-2xl overflow-hidden"
+                className="absolute inset-0 -translate-x-1.5 -translate-y-1.5 rounded-2xl overflow-hidden transition-transform duration-300 group-hover:-translate-x-0.5 group-hover:-translate-y-0.5"
                 style={{ border: '1px solid rgba(232,238,255,0.08)' }}
               >
                 <img
