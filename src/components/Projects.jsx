@@ -73,12 +73,12 @@ export default function Projects() {
             <div key={project.title} className="project-card group overflow-hidden">
               {/* Background Image */}
               <div
-                className="absolute inset-0 bg-cover bg-center opacity-[0.08] group-hover:opacity-[0.20] transition-all duration-700 scale-100 group-hover:scale-105 pointer-events-none"
+                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-45 transition-all duration-700 scale-100 group-hover:scale-110 pointer-events-none"
                 style={{ backgroundImage: `url(${project.bg})` }}
               />
               {/* Dark Overlay */}
               <div
-                className="absolute inset-0 bg-gradient-to-t from-[#07101e] via-[#07101e]/90 to-[#07101e]/75 transition-all duration-500 pointer-events-none"
+                className="absolute inset-0 bg-gradient-to-t from-[#07101e] via-[#07101e]/85 to-[#07101e]/60 transition-all duration-500 pointer-events-none"
               />
 
               <div className="relative z-10 flex flex-col h-full">
