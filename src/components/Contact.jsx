@@ -1,5 +1,9 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
+import AnimatedSection, { fadeUp, slideLeft, slideRight } from './ui/AnimatedSection';
+import Card3D from './ui/Card3D';
 
 const SOCIALS = [
   {
@@ -7,7 +11,7 @@ const SOCIALS = [
     href: "https://github.com/Ayushsoni9125",
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.807 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
       </svg>
     ),
   },
@@ -26,6 +30,7 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,28 +64,35 @@ export default function Contact() {
   return (
     <section id="contact" className="py-24 sm:py-32">
       <div className="section-container">
-        <h2 className="section-heading">Contact</h2>
-        <span className="accent-bar" />
+        <AnimatedSection variants={fadeUp}>
+          <h2 className="section-heading">Contact</h2>
+          <span className="accent-bar" />
+        </AnimatedSection>
 
-        <div className="grid lg:grid-cols-2 gap-14 lg:gap-20">
+        <div ref={ref} className="grid lg:grid-cols-2 gap-14 lg:gap-20">
           {/* Left: info */}
-          <div>
+          <motion.div
+            variants={slideLeft}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+          >
             <p className="text-lg leading-relaxed mb-8" style={{ color: 'rgba(232,238,255,0.55)' }}>
               I'm currently open to freelance work and full-time positions.
               Have a project in mind or want to collaborate? Let's build something great together.
             </p>
 
             {/* Email */}
-            <a
+            <motion.a
               href="mailto:soniayush9125@gmail.com"
               id="contact-email-link"
               className="group flex items-center gap-4 mb-8 transition-all duration-200"
+              whileHover={{ x: 6 }}
             >
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-110"
                 style={{
-                  background: 'rgba(59,158,255,0.1)',
-                  border: '1px solid rgba(59,158,255,0.2)',
+                  background: 'rgba(59,158,255,0.08)',
+                  border: '1px solid rgba(59,158,255,0.15)',
                   color: '#3b9eff',
                 }}
               >
@@ -95,12 +107,12 @@ export default function Contact() {
               >
                 soniayush9125@gmail.com
               </span>
-            </a>
+            </motion.a>
 
             {/* Social links */}
             <div className="flex gap-3">
               {SOCIALS.map(social => (
-                <a
+                <motion.a
                   key={social.name}
                   href={social.href}
                   target="_blank"
@@ -108,72 +120,84 @@ export default function Contact() {
                   aria-label={social.name}
                   className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200"
                   style={{
-                    background: 'rgba(255,255,255,0.04)',
+                    background: 'rgba(255,255,255,0.03)',
                     border: '1px solid rgba(232,238,255,0.07)',
                     color: 'rgba(232,238,255,0.4)',
                   }}
-                  onMouseOver={e => {
-                    e.currentTarget.style.borderColor = 'rgba(59,158,255,0.35)';
-                    e.currentTarget.style.color = '#3b9eff';
-                    e.currentTarget.style.background = 'rgba(59,158,255,0.08)';
+                  whileHover={{
+                    scale: 1.1,
+                    borderColor: 'rgba(59,158,255,0.3)',
+                    color: '#3b9eff',
+                    backgroundColor: 'rgba(59,158,255,0.06)',
                   }}
-                  onMouseOut={e => {
-                    e.currentTarget.style.borderColor = 'rgba(232,238,255,0.07)';
-                    e.currentTarget.style.color = 'rgba(232,238,255,0.4)';
-                    e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {social.icon}
-                </a>
+                </motion.a>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Right: form */}
-          <form className="space-y-4" onSubmit={handleSubmit}>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <input
-                id="contact-name"
-                type="text"
-                placeholder="Name"
-                required
-                value={formData.name}
-                className="form-input"
-                onChange={e => setFormData({ ...formData, name: e.target.value })}
-              />
-              <input
-                id="contact-email"
-                type="email"
-                placeholder="Email"
-                required
-                value={formData.email}
-                className="form-input"
-                onChange={e => setFormData({ ...formData, email: e.target.value })}
-              />
-            </div>
-            <textarea
-              id="contact-message"
-              rows="5"
-              placeholder="Your message..."
-              required
-              value={formData.message}
-              className="form-input resize-none"
-              onChange={e => setFormData({ ...formData, message: e.target.value })}
-            />
-            <button
-              id="contact-submit"
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
-            >
-              {loading ? 'Sending...' : 'Send Message'}
-            </button>
-            {success && (
-              <p className="text-center text-sm font-bold" style={{ color: '#3b9eff' }}>
-                ✓ Message sent successfully!
-              </p>
-            )}
-          </form>
+          {/* Right: form (using 3D card wrapper) */}
+          <motion.div
+            variants={slideRight}
+            initial="hidden"
+            animate={inView ? 'visible' : 'hidden'}
+          >
+            <Card3D className="glass-panel p-8" intensity={5} glareOpacity={0.05}>
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <input
+                    id="contact-name"
+                    type="text"
+                    placeholder="Name"
+                    required
+                    value={formData.name}
+                    className="form-input"
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                  />
+                  <input
+                    id="contact-email"
+                    type="email"
+                    placeholder="Email"
+                    required
+                    value={formData.email}
+                    className="form-input"
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+                <textarea
+                  id="contact-message"
+                  rows="5"
+                  placeholder="Your message..."
+                  required
+                  value={formData.message}
+                  className="form-input resize-none"
+                  onChange={e => setFormData({ ...formData, message: e.target.value })}
+                />
+                <motion.button
+                  id="contact-submit"
+                  type="submit"
+                  disabled={loading}
+                  className="btn-primary w-full justify-center disabled:opacity-60 disabled:cursor-not-allowed"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {loading ? 'Sending...' : 'Send Message'}
+                </motion.button>
+                {success && (
+                  <motion.p
+                    className="text-center text-sm font-bold mt-2"
+                    style={{ color: '#3b9eff' }}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                  >
+                    ✓ Message sent successfully!
+                  </motion.p>
+                )}
+              </form>
+            </Card3D>
+          </motion.div>
         </div>
       </div>
     </section>

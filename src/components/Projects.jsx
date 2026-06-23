@@ -1,4 +1,8 @@
+import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 import { ArrowUpRight } from "lucide-react";
+import Card3D from './ui/Card3D';
+import AnimatedSection, { fadeUp, staggerContainer } from './ui/AnimatedSection';
 
 const PROJECTS = [
   {
@@ -9,6 +13,7 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/Shop-Now",
     featured: true,
     bg: "/project_bg_ecommerce.png",
+    accent: '#3b9eff',
   },
   {
     title: "AI Resume Builder",
@@ -18,6 +23,7 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/resume_builder",
     featured: false,
     bg: "/project_bg_resume.png",
+    accent: '#7dc3ff',
   },
   {
     title: "Connectify",
@@ -27,6 +33,7 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/Connectify",
     featured: false,
     bg: "/project_bg_connectify.png",
+    accent: '#5aadff',
   },
 ];
 
@@ -36,113 +43,149 @@ const GitHubIcon = () => (
   </svg>
 );
 
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, rotateX: 5 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      duration: 0.7,
+      delay: i * 0.15,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
 export default function Projects() {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
+
   return (
     <section id="projects" className="py-24 sm:py-32">
       <div className="section-container">
         {/* Header */}
-        <div className="flex items-end justify-between flex-wrap gap-4">
-          <div>
-            <h2 className="section-heading">Projects</h2>
-            <span className="accent-bar" />
+        <AnimatedSection variants={fadeUp}>
+          <div className="flex items-end justify-between flex-wrap gap-4">
+            <div>
+              <h2 className="section-heading">Projects</h2>
+              <span className="accent-bar" />
+            </div>
+            <motion.a
+              href="https://github.com/Ayushsoni9125"
+              target="_blank"
+              rel="noreferrer"
+              id="projects-view-all"
+              className="text-sm font-bold pb-0.5 transition-colors duration-200"
+              style={{ color: '#3b9eff', borderBottom: '1px solid rgba(59,158,255,0.3)' }}
+              whileHover={{ x: 4 }}
+              transition={{ type: 'spring', stiffness: 400 }}
+            >
+              View All on GitHub →
+            </motion.a>
           </div>
-          <a
-            href="https://github.com/Ayushsoni9125"
-            target="_blank"
-            rel="noreferrer"
-            id="projects-view-all"
-            className="text-sm font-bold pb-0.5 transition-colors duration-200"
-            style={{
-              color: '#3b9eff',
-              borderBottom: '1px solid rgba(59,158,255,0.3)',
-            }}
-            onMouseOver={e => {
-              e.currentTarget.style.borderBottomColor = '#3b9eff';
-            }}
-            onMouseOut={e => {
-              e.currentTarget.style.borderBottomColor = 'rgba(59,158,255,0.3)';
-            }}
-          >
-            View All on GitHub →
-          </a>
-        </div>
+        </AnimatedSection>
 
         {/* Cards grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
-          {PROJECTS.map((project) => (
-            <div key={project.title} className="project-card group overflow-hidden">
-              {/* Background Image */}
-              <div
-                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-45 transition-all duration-700 scale-100 group-hover:scale-110 pointer-events-none"
-                style={{ backgroundImage: `url(${project.bg})` }}
-              />
-              {/* Dark Overlay */}
-              <div
-                className="absolute inset-0 bg-gradient-to-t from-[#07101e] via-[#07101e]/85 to-[#07101e]/60 transition-all duration-500 pointer-events-none"
-              />
+        <div
+          ref={ref}
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-6 perspective-1000"
+        >
+          {PROJECTS.map((project, i) => (
+            <motion.div
+              key={project.title}
+              custom={i}
+              variants={cardVariants}
+              initial="hidden"
+              animate={inView ? 'visible' : 'hidden'}
+              style={{ perspective: '1000px' }}
+            >
+              <Card3D
+                className="project-card group overflow-hidden h-full"
+                intensity={10}
+                glareOpacity={0.08}
+              >
+                {/* Background Image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-25 group-hover:opacity-40 transition-all duration-700 scale-100 group-hover:scale-110 pointer-events-none"
+                  style={{ backgroundImage: `url(${project.bg})` }}
+                />
+                {/* Dark Overlay */}
+                <div
+                  className="absolute inset-0 bg-gradient-to-t from-[#07101e] via-[#07101e]/85 to-[#07101e]/55 transition-all duration-500 pointer-events-none"
+                />
 
-              <div className="relative z-10 flex flex-col h-full">
-                {/* Card top row */}
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center gap-2">
-                    <h3
-                      className="text-lg font-bold text-white transition-colors duration-200 group-hover:text-blue-400"
-                    >
-                      {project.title}
-                    </h3>
-                    {project.featured && (
-                      <span
-                        className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
-                        style={{
-                          background: 'rgba(59,158,255,0.15)',
-                          color: '#3b9eff',
-                        }}
+                {/* Top accent line */}
+                <div
+                  className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}
+                />
+
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Card top row */}
+                  <div className="flex justify-between items-start mb-4">
+                    <div className="flex items-center gap-2">
+                      <h3
+                        className="text-lg font-bold text-white transition-colors duration-200 group-hover:text-blue-400"
                       >
-                        Featured
-                      </span>
-                    )}
+                        {project.title}
+                      </h3>
+                      {project.featured && (
+                        <motion.span
+                          className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
+                          style={{
+                            background: 'rgba(59,158,255,0.15)',
+                            color: '#3b9eff',
+                            border: '1px solid rgba(59,158,255,0.2)',
+                          }}
+                          animate={{ opacity: [0.7, 1, 0.7] }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
+                          Featured
+                        </motion.span>
+                      )}
+                    </div>
+                    <motion.a
+                      href={project.git}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${project.title} GitHub`}
+                      className="transition-colors duration-200 ml-2 shrink-0"
+                      style={{ color: 'rgba(232,238,255,0.25)' }}
+                      whileHover={{ scale: 1.2, color: 'rgba(232,238,255,0.9)', rotate: 5 }}
+                    >
+                      <GitHubIcon />
+                    </motion.a>
                   </div>
-                  <a
-                    href={project.git}
+
+                  {/* Description */}
+                  <p
+                    className="text-sm leading-relaxed mb-5 flex-1"
+                    style={{ color: 'rgba(232,238,255,0.5)' }}
+                  >
+                    {project.desc}
+                  </p>
+
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="tag">{tag}</span>
+                    ))}
+                  </div>
+
+                  {/* Live link */}
+                  <motion.a
+                    href={project.link}
                     target="_blank"
                     rel="noreferrer"
-                    aria-label={`${project.title} GitHub`}
-                    className="transition-colors duration-200 ml-2 shrink-0"
-                    style={{ color: 'rgba(232,238,255,0.25)' }}
-                    onMouseOver={e => e.currentTarget.style.color = 'rgba(232,238,255,0.8)'}
-                    onMouseOut={e => e.currentTarget.style.color = 'rgba(232,238,255,0.25)'}
+                    className="inline-flex items-center gap-1 text-sm font-bold transition-all duration-200 w-fit"
+                    style={{ color: '#3b9eff' }}
+                    whileHover={{ x: 4, gap: '0.5rem' }}
                   >
-                    <GitHubIcon />
-                  </a>
+                    Live Demo <ArrowUpRight size={15} />
+                  </motion.a>
                 </div>
-
-                {/* Description */}
-                <p
-                  className="text-sm leading-relaxed mb-5 flex-1"
-                  style={{ color: 'rgba(232,238,255,0.45)' }}
-                >
-                  {project.desc}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="tag">{tag}</span>
-                  ))}
-                </div>
-
-                {/* Live link */}
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-sm font-bold transition-all duration-200"
-                  style={{ color: '#3b9eff' }}
-                >
-                  Live Demo <ArrowUpRight size={15} />
-                </a>
-              </div>
-            </div>
+              </Card3D>
+            </motion.div>
           ))}
         </div>
       </div>
