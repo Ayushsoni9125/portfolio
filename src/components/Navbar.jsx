@@ -31,7 +31,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Resume', href: '/resume.pdf', id: 'resume', external: true },
+    { name: 'Resume', href: '/resume-template.html', id: 'resume', external: true },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
