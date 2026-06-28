@@ -12,11 +12,11 @@ export default function QuoteReveal() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   });
 
   return (
-    <div ref={containerRef} style={{ height: '180vh' }}>
+    <div ref={containerRef} style={{ height: '300vh' }}>
       <div
         className="sticky top-0 h-screen flex items-center justify-center px-6 sm:px-12 font-medium"
         style={{ background: '#1a1a1a' }}
@@ -51,8 +51,9 @@ export default function QuoteReveal() {
 }
 
 function QuoteWord({ word, index, total, scrollYProgress }) {
-  const start = 0.1 + (index / total) * 0.5;
-  const end = start + 0.15;
+  // Map the word reveal across 75% of the sticky scroll duration
+  const start = (index / total) * 0.75;
+  const end = start + 0.12;
 
   const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
   const color = useTransform(
