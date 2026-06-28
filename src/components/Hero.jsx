@@ -25,7 +25,61 @@ const terminalData = [
   { key: 'current-career-focus', value: 'Fullstack Web Developer' },
 ];
 
+function Typewriter({ text, delay = 0, speed = 65 }) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+
+  useEffect(() => {
+    let timeoutId;
+    let intervalId;
+
+    timeoutId = setTimeout(() => {
+      setIsTyping(true);
+      let index = 0;
+      intervalId = setInterval(() => {
+        if (index < text.length) {
+          setDisplayedText(text.slice(0, index + 1));
+          index++;
+        } else {
+          clearInterval(intervalId);
+          setIsTyping(false);
+        }
+      }, speed);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
+  }, [text, delay, speed]);
+
+  return (
+    <span>
+      {displayedText}
+      {isTyping && (
+        <motion.span
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 0.6, repeat: Infinity }}
+          style={{ color: '#FF611D', marginLeft: '1px', fontWeight: 'bold' }}
+        >
+          |
+        </motion.span>
+      )}
+    </span>
+  );
+}
+
 function TerminalBlock() {
+  const [loopKey, setLoopKey] = useState(0);
+
+  // Restart the typing animation every 9.5 seconds (types for ~5s, pauses for ~4.5s)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLoopKey(prev => prev + 1);
+    }, 9500);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40, scale: 0.97 }}
@@ -55,7 +109,8 @@ function TerminalBlock() {
 
         {/* JSON content — exactly like Long's */}
         <pre
-          className="px-6 pt-5 pb-5 text-sm md:text-base font-mono overflow-x-auto"
+          key={loopKey}
+          className="px-6 pt-5 pb-5 text-sm md:text-base font-mono overflow-x-auto text-left"
           style={{ color: 'rgba(214,210,189,0.7)', lineHeight: 1.8 }}
         >
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
@@ -64,28 +119,34 @@ function TerminalBlock() {
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>: {'{'}</span>{'\n'}
           </motion.span>
 
-          {terminalData.map(({ key, value }, i) => (
-            <motion.div
-              key={key}
-              initial={{ opacity: 0, x: -8 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.9 + i * 0.15, duration: 0.35 }}
-            >
-              {'    '}
-              <span style={{ color: 'rgba(214,210,189,0.5)' }}>"{key}"</span>
-              <span style={{ color: 'rgba(214,210,189,0.3)' }}>: </span>
-              <span style={{ color: '#FF611D', fontWeight: 500 }}>"{value}"</span>
-              {i < terminalData.length - 1 && (
-                <span style={{ color: 'rgba(214,210,189,0.25)' }}>,</span>
-              )}
-              {'\n'}
-            </motion.div>
-          ))}
+          {terminalData.map(({ key, value }, i) => {
+            // Calculate delay so lines type out sequentially
+            let lineDelay = 1000;
+            if (i === 1) lineDelay = 1900;
+            if (i === 2) lineDelay = 3500;
+
+            return (
+              <div key={key}>
+                {'    '}
+                <span style={{ color: 'rgba(214,210,189,0.5)' }}>"{key}"</span>
+                <span style={{ color: 'rgba(214,210,189,0.3)' }}>: </span>
+                <span style={{ color: '#FF611D', fontWeight: 500 }}>"</span>
+                <span style={{ color: '#FF611D', fontWeight: 500 }}>
+                  <Typewriter text={value} delay={lineDelay} speed={65} />
+                </span>
+                <span style={{ color: '#FF611D', fontWeight: 500 }}>"</span>
+                {i < terminalData.length - 1 && (
+                  <span style={{ color: 'rgba(214,210,189,0.25)' }}>,</span>
+                )}
+                {'\n'}
+              </div>
+            );
+          })}
 
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 + terminalData.length * 0.15 }}
+            transition={{ delay: 5.3 }}
           >
             {'  '}<span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>{'\n'}
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>
