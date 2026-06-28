@@ -106,46 +106,48 @@ export default function Navbar() {
               {/* Logo in pill */}
               <a
                 href="#home"
-                className="font-bold text-sm px-3 py-1 rounded-full"
+                className="font-bold text-sm px-3 py-1 rounded-full whitespace-nowrap"
                 style={{ color: '#D6D2BD' }}
               >
                 Ayush<span style={{ color: '#FF611D' }}>.</span>
               </a>
 
-              <div className="w-px h-4 mx-1" style={{ background: 'rgba(214,210,189,0.12)' }} />
+              <div className="hidden md:block w-px h-4 mx-1" style={{ background: 'rgba(214,210,189,0.12)' }} />
 
-              {/* Nav links */}
-              {navLinks.map(link => (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noreferrer" : undefined}
-                  className="relative px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
-                  style={{
-                    color: activeSection === link.id ? '#fff' : 'rgba(214,210,189,0.6)',
-                    background: activeSection === link.id ? 'rgba(255,97,29,0.15)' : 'transparent',
-                  }}
-                >
-                  {link.name}
-                  {activeSection === link.id && (
-                    <motion.div
-                      layoutId="pill-indicator"
-                      className="absolute inset-0 rounded-full"
-                      style={{
-                        background: 'rgba(255,97,29,0.1)',
-                        border: '1px solid rgba(255,97,29,0.25)',
-                      }}
-                      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                    />
-                  )}
-                </a>
-              ))}
+              {/* Nav links (hidden on mobile, visible on desktop) */}
+              <div className="hidden md:flex items-center gap-1">
+                {navLinks.map(link => (
+                  <a
+                    key={link.id}
+                    href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
+                    className="relative px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200 whitespace-nowrap"
+                    style={{
+                      color: activeSection === link.id ? '#fff' : 'rgba(214,210,189,0.6)',
+                      background: activeSection === link.id ? 'rgba(255,97,29,0.15)' : 'transparent',
+                    }}
+                  >
+                    {link.name}
+                    {activeSection === link.id && (
+                      <motion.div
+                        layoutId="pill-indicator"
+                        className="absolute inset-0 rounded-full"
+                        style={{
+                          background: 'rgba(255,97,29,0.1)',
+                          border: '1px solid rgba(255,97,29,0.25)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                      />
+                    )}
+                  </a>
+                ))}
+              </div>
 
               {/* CTA */}
               <a
                 href="#contact"
-                className="ml-1 px-4 py-1.5 rounded-full text-[11px] font-bold text-white transition-all duration-200"
+                className="ml-1 px-4 py-1.5 rounded-full text-[11px] font-bold text-white transition-all duration-200 whitespace-nowrap"
                 style={{
                   background: '#FF611D',
                   boxShadow: '0 0 12px rgba(255,97,29,0.3)',
@@ -154,7 +156,7 @@ export default function Navbar() {
                 Let's Talk
               </a>
 
-              {/* Mobile toggle inside pill */}
+              {/* Mobile toggle inside pill (visible only on mobile) */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
                 className="md:hidden px-2 py-1 ml-1"

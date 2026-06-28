@@ -1,11 +1,38 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { GitHubCalendar } from 'react-github-calendar';
+import { useState, useEffect } from 'react';
 import profileImg from "../assets/ayush.png";
 import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
 export default function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
+  const [calendarConfig, setCalendarConfig] = useState({
+    blockSize: 12,
+    blockMargin: 4,
+    fontSize: 12
+  });
+
+  // Dynamically adjust block size based on window width for perfect mobile responsiveness
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width < 480) {
+        // Small mobile screens
+        setCalendarConfig({ blockSize: 5.5, blockMargin: 2, fontSize: 9 });
+      } else if (width < 768) {
+        // Tablets
+        setCalendarConfig({ blockSize: 8, blockMargin: 3, fontSize: 10 });
+      } else {
+        // Desktop
+        setCalendarConfig({ blockSize: 12, blockMargin: 4, fontSize: 12 });
+      }
+    };
+
+    handleResize(); // Call initially
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   // Custom theme matching Ayush's orange accent color (#FF611D)
   const orangeTheme = {
@@ -91,21 +118,20 @@ export default function About() {
             {/* Live Interactive GitHub Calendar */}
             <div className="flex justify-center py-4">
               <div 
-                className="w-full max-w-4xl overflow-x-auto p-6 rounded-2xl"
+                className="w-full max-w-4xl overflow-hidden p-4 sm:p-6 rounded-2xl"
                 style={{ 
                   background: '#1a1a1a', 
                   border: '1px solid rgba(214, 210, 189, 0.08)',
-                  scrollbarWidth: 'none'
                 }}
               >
-                <div className="min-w-[760px] flex justify-center">
+                <div className="w-full flex justify-center overflow-x-auto" style={{ scrollbarWidth: 'none' }}>
                   <GitHubCalendar 
                     username="Ayushsoni9125" 
                     theme={orangeTheme}
                     colorScheme="dark"
-                    fontSize={12}
-                    blockSize={12}
-                    blockMargin={4}
+                    fontSize={calendarConfig.fontSize}
+                    blockSize={calendarConfig.blockSize}
+                    blockMargin={calendarConfig.blockMargin}
                     showTotalCount={true}
                     showColorLegend={true}
                   />
