@@ -110,12 +110,13 @@ function TerminalBlock() {
         {/* JSON content — exactly like Long's */}
         <pre
           key={loopKey}
-          className="px-6 pt-5 pb-5 text-sm md:text-base font-mono overflow-x-auto text-left"
+          className="px-3 md:px-6 pt-5 pb-5 text-[11px] sm:text-sm md:text-base font-mono overflow-x-auto text-left"
           style={{ color: 'rgba(214,210,189,0.7)', lineHeight: 1.8 }}
         >
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'{'}</span>{'\n'}
-            {'  '}<span style={{ color: 'rgba(214,210,189,0.4)' }}>"about_me"</span>
+            <span className="pl-2 md:pl-4 inline-block" />
+            <span style={{ color: 'rgba(214,210,189,0.4)' }}>"about_me"</span>
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>: {'{'}</span>{'\n'}
           </motion.span>
 
@@ -127,7 +128,7 @@ function TerminalBlock() {
 
             return (
               <div key={key}>
-                {'    '}
+                <span className="pl-4 md:pl-8 inline-block" />
                 <span style={{ color: 'rgba(214,210,189,0.5)' }}>"{key}"</span>
                 <span style={{ color: 'rgba(214,210,189,0.3)' }}>: </span>
                 <span style={{ color: '#FF611D', fontWeight: 500 }}>"</span>
@@ -148,7 +149,8 @@ function TerminalBlock() {
             animate={{ opacity: 1 }}
             transition={{ delay: 5.3 }}
           >
-            {'  '}<span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>{'\n'}
+            <span className="pl-2 md:pl-4 inline-block" />
+            <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>{'\n'}
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>
           </motion.span>
         </pre>
