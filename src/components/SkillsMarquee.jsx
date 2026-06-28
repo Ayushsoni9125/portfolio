@@ -1,5 +1,5 @@
 const ROW_1 = '<React> <Node.js> <Express> <MongoDB> <PostgreSQL> <REST APIs>';
-const ROW_2 = '[Full-Stack Dev] [Cloud & AWS] [API Engineering] [Auth & Security] [UI/UX]';
+const ROW_2 = '[Full-Stack Dev] [Cloud & AWS] [API Engineering] [Auth & Security]';
 
 function MarqueeRow({ text, reverse = false, speed = 35 }) {
   // Repeat text enough times to fill infinite scroll
@@ -26,8 +26,8 @@ function MarqueeRow({ text, reverse = false, speed = 35 }) {
             key={i}
             className="text-4xl md:text-6xl font-black tracking-tight flex-shrink-0"
             style={{
-              color: 'rgba(232,238,255,0.07)',
-              WebkitTextStroke: '1px rgba(232,238,255,0.12)',
+              color: 'rgba(232,238,255,0.65)',
+              WebkitTextStroke: '1px rgba(232,238,255,0.2)',
               letterSpacing: '-0.02em',
             }}
           >
@@ -36,7 +36,7 @@ function MarqueeRow({ text, reverse = false, speed = 35 }) {
               className="inline-block mx-8"
               style={{
                 color: '#3b9eff',
-                opacity: 0.3,
+                opacity: 1,
                 WebkitTextStroke: '0px',
               }}
             >
