@@ -5,6 +5,66 @@ import { useState, useEffect } from 'react';
 import profileImg from "../assets/ayush.png";
 import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
+// Typewriter component for headings with infinite loop capability
+function Typewriter({ text, delay = 0, speed = 80, trigger = false, loop = false, loopDelay = 1500 }) {
+  const [displayedText, setDisplayedText] = useState('');
+  const [isTyping, setIsTyping] = useState(false);
+  const [loopKey, setLoopKey] = useState(0);
+
+  useEffect(() => {
+    if (!trigger) {
+      setDisplayedText('');
+      return;
+    }
+
+    let timeoutId;
+    let intervalId;
+    let loopTimeoutId;
+
+    timeoutId = setTimeout(() => {
+      setIsTyping(true);
+      let index = 0;
+      intervalId = setInterval(() => {
+        if (index < text.length) {
+          setDisplayedText(text.slice(0, index + 1));
+          index++;
+        } else {
+          clearInterval(intervalId);
+          setIsTyping(false);
+          
+          if (loop) {
+            loopTimeoutId = setTimeout(() => {
+              setDisplayedText('');
+              setLoopKey(prev => prev + 1);
+            }, loopDelay);
+          }
+        }
+      }, speed);
+    }, delay);
+
+    return () => {
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+      clearTimeout(loopTimeoutId);
+    };
+  }, [text, delay, speed, trigger, loop, loopDelay, loopKey]);
+
+  return (
+    <span>
+      {displayedText}
+      {isTyping && (
+        <motion.span
+          animate={{ opacity: [0, 1, 0] }}
+          transition={{ duration: 0.6, repeat: Infinity }}
+          style={{ color: '#FF611D', marginLeft: '2px' }}
+        >
+          |
+        </motion.span>
+      )}
+    </span>
+  );
+}
+
 export default function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
   const [calendarConfig, setCalendarConfig] = useState({
@@ -58,7 +118,7 @@ export default function About() {
               className="font-bold mb-6 text-white" 
               style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontFamily: "'Fira Code', monospace" }}
             >
-              Hi, I'm Ayush!
+              <Typewriter text="Hi, I'm Ayush!" trigger={inView} delay={200} speed={120} loop={true} loopDelay={1500} />
             </h2>
 
             <p 
