@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import GridCanvas from './GridCanvas';
 
 // Greetings cycling in multiple languages (like Long's site)
 const GREETINGS = [
@@ -118,17 +119,10 @@ export default function Hero() {
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ background: '#333333' }}
     >
-      {/* Subtle grid background like Long's */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(214,210,189,0.06) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(214,210,189,0.06) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-      />
+      {/* Animated 3D perspective grid — like Long's canvas background */}
+      <div className="absolute inset-0 z-0" style={{ opacity: 0.10 }}>
+        <GridCanvas />
+      </div>
 
       {/* Centered content column */}
       <div className="relative z-10 w-full flex flex-col items-center text-center px-6 pt-24 pb-16 gap-8">
