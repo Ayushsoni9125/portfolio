@@ -1,6 +1,8 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
+import QuoteReveal from "./components/QuoteReveal";
+import SkillsMarquee from "./components/SkillsMarquee";
 import Projects from "./components/Projects";
 import Experience from "./components/Experience";
 import Skills from "./components/Skills";
@@ -17,6 +19,10 @@ export default function App() {
       <div className="relative z-10">
         <div className="section-divider" />
         <About />
+        {/* Scroll-driven quote reveal */}
+        <QuoteReveal />
+        {/* Skills marquee banner */}
+        <SkillsMarquee />
         <div className="section-divider" />
         <Projects />
         <div className="section-divider" />
