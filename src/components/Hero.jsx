@@ -1,62 +1,46 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
-// Animated letter drop for "Hello!"
-function AnimatedHello() {
-  const letters = 'Hello!'.split('');
-  return (
-    <span
-      className="flex flex-wrap whitespace-pre-wrap relative font-bold py-6"
-      style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', color: '#FF611D' }}
-      aria-label="Hello!"
-    >
-      <span className="sr-only">Hello!</span>
-      <span className="inline-flex overflow-hidden pb-2" aria-hidden="true">
-        {letters.map((char, i) => (
-          <motion.span
-            key={i}
-            className="inline-block"
-            initial={{ y: 60, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: 0.5,
-              delay: 0.2 + i * 0.07,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {char}
-          </motion.span>
-        ))}
-      </span>
-    </span>
-  );
-}
+// Greetings cycling in multiple languages (like Long's site)
+const GREETINGS = [
+  'Hello!',
+  'Bonjour!',
+  'Namaste!',
+  'Ciao!',
+  'Hola!',
+  'Olá!',
+  'Guten Tag!',
+  'Xin chào!',
+  'Salut!',
+  'Konnichiwa!',
+  'Annyeong!',
+  'Merhaba!',
+];
 
-// macOS terminal/JSON block
+// Terminal JSON data (matching Long's structure exactly)
 const terminalData = [
   { key: 'name', value: 'Ayush Soni' },
   { key: 'career-in-progress', value: 'Software Development' },
-  { key: 'current-focus', value: 'Fullstack Web Developer' },
-  { key: 'stack', value: 'React · Node.js · MongoDB' },
-  { key: 'status', value: 'Open to Opportunities 🚀' },
+  { key: 'current-career-focus', value: 'Fullstack Web Developer' },
 ];
 
 function TerminalBlock() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 50, scale: 0.97 }}
+      initial={{ opacity: 0, y: 40, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full max-w-md"
+      transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full max-w-2xl mx-auto"
     >
       <div
         className="rounded-xl overflow-hidden shadow-2xl"
         style={{
           background: '#1a1a1a',
           border: '1px solid rgba(214,210,189,0.08)',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
+          boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
         }}
       >
-        {/* Traffic lights title bar */}
+        {/* macOS title bar */}
         <div
           className="flex items-center gap-2 px-4 py-3"
           style={{ background: '#111', borderBottom: '1px solid rgba(214,210,189,0.06)' }}
@@ -66,158 +50,132 @@ function TerminalBlock() {
             <div className="w-3 h-3 rounded-full" style={{ background: '#FFBD2E' }} />
             <div className="w-3 h-3 rounded-full" style={{ background: '#27C93F' }} />
           </div>
-          <span className="text-[10px] font-mono ml-2" style={{ color: 'rgba(214,210,189,0.25)' }}>
-            about_me.json
-          </span>
         </div>
 
-        {/* JSON content */}
+        {/* JSON content — exactly like Long's */}
         <pre
-          className="px-5 pt-5 pb-4 text-sm leading-relaxed font-mono overflow-x-auto"
-          style={{ color: 'rgba(214,210,189,0.7)' }}
+          className="px-6 pt-5 pb-5 text-sm md:text-base font-mono overflow-x-auto"
+          style={{ color: 'rgba(214,210,189,0.7)', lineHeight: 1.8 }}
         >
-          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'{'}</span>{'\n'}
+            {'  '}<span style={{ color: 'rgba(214,210,189,0.4)' }}>"about_me"</span>
+            <span style={{ color: 'rgba(214,210,189,0.35)' }}>: {'{'}</span>{'\n'}
           </motion.span>
+
           {terminalData.map(({ key, value }, i) => (
             <motion.div
               key={key}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.1 + i * 0.15, duration: 0.35 }}
+              transition={{ delay: 0.9 + i * 0.15, duration: 0.35 }}
             >
-              {'  '}
+              {'    '}
               <span style={{ color: 'rgba(214,210,189,0.5)' }}>"{key}"</span>
               <span style={{ color: 'rgba(214,210,189,0.3)' }}>: </span>
-              <span style={{ color: '#FF611D', fontWeight: 600 }}>"{value}"</span>
+              <span style={{ color: '#FF611D', fontWeight: 500 }}>"{value}"</span>
               {i < terminalData.length - 1 && (
                 <span style={{ color: 'rgba(214,210,189,0.25)' }}>,</span>
               )}
               {'\n'}
             </motion.div>
           ))}
+
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.1 + terminalData.length * 0.15 }}
+            transition={{ delay: 0.9 + terminalData.length * 0.15 }}
           >
+            {'  '}<span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>{'\n'}
             <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>
           </motion.span>
         </pre>
-
-        {/* Blinking cursor */}
-        <div className="px-5 pb-4 flex items-center gap-2">
-          <span className="font-mono text-xs" style={{ color: '#27C93F' }}>$</span>
-          <motion.span
-            className="w-2 h-[14px] rounded-sm"
-            style={{ background: '#FF611D' }}
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          />
-        </div>
       </div>
-      {/* Subtle shadow glow */}
-      <div className="mx-10 h-3 rounded-b-full blur-md" style={{ background: 'rgba(255,97,29,0.1)' }} />
+
+      {/* Glow under terminal */}
+      <div
+        className="mx-16 h-3 rounded-b-full blur-md"
+        style={{ background: 'rgba(255,97,29,0.08)' }}
+      />
     </motion.div>
   );
 }
 
 export default function Hero() {
+  const [greetingIndex, setGreetingIndex] = useState(0);
+
+  // Cycle through greetings every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setGreetingIndex(prev => (prev + 1) % GREETINGS.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
       style={{ background: '#333333' }}
     >
-      {/* Subtle ambient glow */}
-      <div className="hero-glow" />
-      <div className="hero-glow-2" />
+      {/* Subtle grid background like Long's */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-20"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(214,210,189,0.06) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(214,210,189,0.06) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
 
-      {/* Main content — centered column layout */}
-      <div className="section-container relative z-10 pt-28 pb-20 w-full">
-        <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16">
+      {/* Centered content column */}
+      <div className="relative z-10 w-full flex flex-col items-center text-center px-6 pt-24 pb-16 gap-8">
 
-          {/* Left column */}
-          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
-            <AnimatedHello />
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.85, duration: 0.6 }}
-              className="text-lg sm:text-xl font-medium max-w-md leading-relaxed mb-8"
-              style={{ color: 'rgba(214,210,189,0.65)' }}
+        {/* Cycling greeting in orange — with smooth cross-fade */}
+        <div className="relative h-[clamp(4rem,12vw,8rem)] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.h1
+              key={greetingIndex}
+              initial={{ opacity: 0, y: -40, scale: 1.05 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 40, scale: 0.95 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="font-bold absolute"
+              style={{
+                fontSize: 'clamp(3.5rem, 10vw, 7rem)',
+                color: '#FF611D',
+                letterSpacing: '-0.02em',
+                lineHeight: 1,
+              }}
             >
-              I build high-performance{' '}
-              <span style={{ color: '#D6D2BD', fontWeight: 600 }}>MERN ecosystems</span>{' '}
-              — scalable, secure, and cinematic.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.6 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-4"
-            >
-              <a href="#about" id="hero-explore-btn" className="btn-primary group">
-                View my work
-                <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-              <a href="#contact" id="hero-contact-btn" className="btn-outline">Contact Me</a>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-8 mt-14 pt-8"
-              style={{ borderTop: '1px solid rgba(214,210,189,0.08)' }}
-            >
-              {[
-                { value: '5+', label: 'Projects Shipped' },
-                { value: 'MERN', label: 'Core Stack' },
-                { value: 'AWS', label: 'Certified' },
-              ].map(({ value, label }) => (
-                <motion.div
-                  key={label}
-                  whileHover={{ y: -2, scale: 1.04 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                >
-                  <div className="text-xl font-black mb-0.5" style={{ color: '#D6D2BD' }}>{value}</div>
-                  <div className="text-[10px] font-bold uppercase tracking-widest font-mono" style={{ color: 'rgba(214,210,189,0.35)' }}>
-                    {label}
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Right column: Terminal block */}
-          <div className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-end">
-            <TerminalBlock />
-          </div>
+              {GREETINGS[greetingIndex]}
+            </motion.h1>
+          </AnimatePresence>
         </div>
-      </div>
 
-      {/* Scroll arrow */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
+        {/* Terminal block */}
+        <div className="w-full max-w-2xl">
+          <TerminalBlock />
+        </div>
+
+        {/* Scroll down arrow */}
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="text-2xl"
-          style={{ color: '#FF611D' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.6 }}
+          className="mt-4"
         >
-          ↓
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ color: '#FF611D', fontSize: '1.5rem' }}
+          >
+            ↓
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }
