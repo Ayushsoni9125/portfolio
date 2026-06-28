@@ -12,11 +12,11 @@ export default function QuoteReveal() {
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start start', 'end end'],
+    offset: ['start end', 'end start'],
   });
 
   return (
-    <div ref={containerRef} style={{ height: '300vh' }}>
+    <div ref={containerRef} style={{ height: '120vh' }}>
       <div
         className="sticky top-0 h-screen flex items-center justify-center px-6 sm:px-12 font-medium"
         style={{ background: '#1a1a1a' }}
@@ -51,9 +51,10 @@ export default function QuoteReveal() {
 }
 
 function QuoteWord({ word, index, total, scrollYProgress }) {
-  // Map the word reveal across 75% of the sticky scroll duration
-  const start = (index / total) * 0.75;
-  const end = start + 0.12;
+  // Height of 120vh keeps the scroll gap exactly at 20vh (approx. 150px),
+  // matching Long's site. Words reveal quickly between 0.10 and 0.45 of the scroll.
+  const start = 0.10 + (index / total) * 0.27;
+  const end = start + 0.08;
 
   const opacity = useTransform(scrollYProgress, [start, end], [0.15, 1]);
   const color = useTransform(

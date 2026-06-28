@@ -2,33 +2,45 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
+// Exact skills from resume
 const SKILL_GROUPS = [
   {
-    title: "Core Stack",
-    icon: "⚡",
-    skills: ["React.js", "Node.js", "Express.js", "MERN Architecture"],
+    title: "Languages",
+    icon: "💻",
+    skills: ["TypeScript", "JavaScript", "C / C++", "HTML", "CSS"],
+  },
+  {
+    title: "Frameworks",
+    icon: "⚛️",
+    skills: ["Next.js", "React.js (v19)", "Node.js", "Express.js", "Tailwind CSS"],
   },
   {
     title: "Databases",
     icon: "🗄️",
-    skills: ["MongoDB (Mongoose)", "PostgreSQL", "Data Integrity", "Transactions"],
+    skills: ["MongoDB (Mongoose)", "PostgreSQL"],
   },
   {
-    title: "DevOps / Tools",
+    title: "Tools & Platforms",
     icon: "🛠️",
-    skills: ["Git / GitHub", "Postman", "Vercel / Render", "Docker"],
-  },
-  {
-    title: "Security",
-    icon: "🔐",
-    skills: ["JWT Auth", "bcryptjs", "RBAC", "REST API Security"],
+    skills: ["Git / GitHub", "Postman", "Vite", "Vercel / Render"],
   },
 ];
 
+const CONCEPTS = [
+  "REST APIs",
+  "JWT Authentication",
+  "Role-Based Access Control",
+  "Data Structures & Algorithms",
+  "Socket.io (WebSockets)",
+  "Bcryptjs",
+  "API Security",
+  "Axios",
+];
+
 const CERTIFICATIONS = [
-  { name: "AWS Certified AI Practitioner", code: "AIF-C01", color: '#FF611D' },
-  { name: "AWS Certified Cloud Practitioner", code: "CLF-C02", color: '#FF611D' },
-  { name: "HackWave 2.0", code: "Top 10 / 100+ Teams", color: '#D6D2BD' },
+  { name: "AWS Certified AI Practitioner", code: "AIF-C01" },
+  { name: "AWS Certified Cloud Practitioner", code: "CLF-C02" },
+  { name: "HackWave 2.0 Hackathon", code: "Top 10 / 100+ Teams" },
 ];
 
 const containerVariants = {
@@ -47,6 +59,7 @@ const itemVariants = {
 export default function Skills() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
   const [certRef, certInView] = useInView({ triggerOnce: true, threshold: 0.15 });
+  const [conceptRef, conceptInView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
     <section id="skills" className="py-24 sm:py-32" style={{ background: '#333333' }}>
@@ -68,7 +81,7 @@ export default function Skills() {
           variants={containerVariants}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-6"
         >
           {SKILL_GROUPS.map((group) => (
             <motion.div key={group.title} variants={itemVariants}>
@@ -89,13 +102,10 @@ export default function Skills() {
                       className="flex items-center gap-3 group/item cursor-default"
                       whileHover={{ x: 4 }}
                     >
-                      <div
-                        className="w-1.5 h-1.5 rounded-full shrink-0"
-                        style={{ background: 'rgba(255,97,29,0.5)' }}
-                      />
+                      <div className="w-1.5 h-1.5 rounded-full shrink-0" style={{ background: 'rgba(255,97,29,0.5)' }} />
                       <span
                         className="text-sm font-medium font-mono transition-colors duration-200 group-hover/item:text-orange-400"
-                        style={{ color: 'rgba(214,210,189,0.55)' }}
+                        style={{ color: 'rgba(214,210,189,0.6)' }}
                       >
                         {skill}
                       </span>
@@ -107,6 +117,32 @@ export default function Skills() {
           ))}
         </motion.div>
 
+        {/* Concepts row */}
+        <motion.div
+          ref={conceptRef}
+          initial={{ opacity: 0, y: 20 }}
+          animate={conceptInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="glass-panel p-6 mb-6"
+        >
+          <h3 className="text-[10px] font-black uppercase tracking-[0.25em] mb-4 font-mono" style={{ color: '#FF611D' }}>
+            Core Concepts
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {CONCEPTS.map((c, i) => (
+              <motion.span
+                key={c}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={conceptInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: i * 0.05, duration: 0.3 }}
+                className="skill-tag"
+              >
+                {c}
+              </motion.span>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Certifications */}
         <motion.div
           ref={certRef}
@@ -115,10 +151,7 @@ export default function Skills() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="glass-panel p-6 sm:p-8">
-            <h3
-              className="text-[10px] font-black uppercase tracking-[0.25em] mb-6 font-mono"
-              style={{ color: '#FF611D' }}
-            >
+            <h3 className="text-[10px] font-black uppercase tracking-[0.25em] mb-6 font-mono" style={{ color: '#FF611D' }}>
               Certifications &amp; Achievements
             </h3>
             <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
@@ -133,10 +166,7 @@ export default function Skills() {
                 >
                   <div
                     className="w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5"
-                    style={{
-                      background: 'rgba(255,97,29,0.1)',
-                      border: '1px solid rgba(255,97,29,0.25)',
-                    }}
+                    style={{ background: 'rgba(255,97,29,0.1)', border: '1px solid rgba(255,97,29,0.25)' }}
                   >
                     <svg className="w-3.5 h-3.5" style={{ color: '#FF611D' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />

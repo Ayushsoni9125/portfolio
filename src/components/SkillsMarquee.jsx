@@ -1,4 +1,4 @@
-const ROW_1 = '<Python> <Java> <C> <SQL> <React> <Node.js> <Express> <MongoDB>';
+const ROW_1 = '<TypeScript> <Next.js> <React> <Node.js> <Express> <MongoDB>';
 const ROW_2 = '[Full-Stack Dev] [Cloud & AWS] [API Engineering] [Auth & Security]';
 
 function MarqueeRow({ text, reverse = false, speed = 35 }) {

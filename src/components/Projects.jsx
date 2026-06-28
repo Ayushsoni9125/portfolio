@@ -200,25 +200,19 @@ export default function Projects() {
     <section id="projects" className="py-24 sm:py-32 overflow-hidden" style={{ background: '#333333' }}>
       <div className="section-container">
         <AnimatedSection variants={fadeUp}>
-          <div className="flex items-end justify-between flex-wrap gap-4 mb-2">
-            <div>
-              <h2 className="font-bold text-3xl uppercase tracking-wide" style={{ color: '#D6D2BD' }}>
-                FEATURED PROJECTS
-              </h2>
-              <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
-                EXPLORE MY WORK
-              </p>
-            </div>
+          <div className="flex flex-col items-center justify-center text-center mb-6">
+            <h2 className="font-bold text-3xl uppercase tracking-wide" style={{ color: '#D6D2BD' }}>
+              FEATURED PROJECTS
+            </h2>
             <motion.a
               href="https://github.com/Ayushsoni9125"
               target="_blank"
               rel="noreferrer"
-              id="projects-view-all"
-              className="text-sm font-medium flex items-center gap-1 transition-colors duration-200"
-              style={{ color: 'rgba(214,210,189,0.55)' }}
-              whileHover={{ color: '#FF611D' }}
+              className="font-semibold text-sm font-mono mt-2 inline-flex items-center gap-1 transition-colors duration-200"
+              style={{ color: '#FF611D' }}
+              whileHover={{ color: '#ff8c55', scale: 1.03 }}
             >
-              View All on GitHub <ArrowUpRight size={14} />
+              EXPLORE MY WORK
             </motion.a>
           </div>
         </AnimatedSection>
