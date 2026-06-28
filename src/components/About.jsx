@@ -106,6 +106,8 @@ export default function About() {
                     fontSize={12}
                     blockSize={12}
                     blockMargin={4}
+                    showTotalCount={true}
+                    showColorLegend={true}
                   />
                 </div>
               </div>

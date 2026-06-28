@@ -346,4 +346,22 @@
     display: inline-block;
     transition: opacity 0.4s ease, color 0.4s ease, transform 0.4s ease;
   }
+
+  /* ─── GitHub Calendar Styling ─── */
+  .react-activity-calendar {
+    color: var(--text) !important;
+  }
+  .react-activity-calendar__footer {
+    color: rgba(214, 210, 189, 0.7) !important;
+    font-size: 11px !important;
+    font-family: 'Fira Code', monospace !important;
+    margin-top: 16px !important;
+  }
+  .react-activity-calendar__legend {
+    color: rgba(214, 210, 189, 0.7) !important;
+    font-size: 11px !important;
+  }
+  .react-activity-calendar text {
+    fill: rgba(214, 210, 189, 0.5) !important;
+  }
 }
