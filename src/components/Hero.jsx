@@ -168,11 +168,11 @@ function TerminalBlock() {
 export default function Hero() {
   const [greetingIndex, setGreetingIndex] = useState(0);
 
-  // Cycle through greetings every 2 seconds
+  // Cycle through greetings every 2.5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setGreetingIndex(prev => (prev + 1) % GREETINGS.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
