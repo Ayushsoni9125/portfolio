@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -29,7 +29,6 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const navLinks = [
-    { name: 'Home', href: '#home', id: 'home' },
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Projects', href: '#projects', id: 'projects' },
     { name: 'Contact', href: '#contact', id: 'contact' },
@@ -37,116 +36,101 @@ export default function Navbar() {
 
   return (
     <>
-      {/* ─── Full-width top navbar (visible before scroll) ─── */}
+      {/* ─── Full top bar (before scroll) ─── */}
       <AnimatePresence>
         {!scrolled && (
           <motion.nav
             key="full-nav"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-0 left-0 w-full z-[100] py-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-0 w-full z-50 transition-all duration-300"
+            style={{ background: 'transparent' }}
           >
-            <div className="section-container flex items-center justify-between">
-              {/* Logo */}
-              <a href="#home" className="text-base font-black tracking-tight text-white hover:text-blue-400 transition-colors duration-200">
-                Ayush<span style={{ color: '#3b9eff' }}>.</span>
+            <div className="w-full px-6 md:px-16 py-5 flex justify-between items-center">
+              <a href="#home" className="font-bold text-lg tracking-tight" style={{ color: '#D6D2BD' }}>
+                Ayush<span style={{ color: '#FF611D' }}>.</span>
               </a>
-
-              {/* Desktop links */}
-              <div className="hidden md:flex items-center gap-10">
+              <nav className="hidden md:flex gap-8">
                 {navLinks.map(link => (
                   <a
                     key={link.id}
                     href={link.href}
-                    className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                    className="nav-link"
+                    style={{ color: activeSection === link.id ? '#FF611D' : '#D6D2BD' }}
                   >
                     {link.name}
                   </a>
                 ))}
-                <a href="#contact" className="btn-primary !py-2 !px-5 !text-xs !rounded-lg !tracking-widest">
-                  Let's Talk
-                </a>
-              </div>
-
+              </nav>
               {/* Mobile hamburger */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
+                className="md:hidden p-2"
+                style={{ color: '#D6D2BD' }}
                 aria-label="Toggle menu"
-                className="md:hidden p-2 transition-colors"
-                style={{ color: 'rgba(232,238,255,0.6)' }}
               >
-                {menuOpen ? (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               </button>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
 
-      {/* ─── Floating pill navbar (visible after scroll) ─── */}
+      {/* ─── Floating pill (after scroll) ─── */}
       <AnimatePresence>
         {scrolled && (
           <motion.div
             key="pill-nav"
-            initial={{ opacity: 0, y: -30, scale: 0.95 }}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed top-4 left-0 right-0 z-[100] flex justify-center pointer-events-none"
+            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed top-4 left-0 right-0 z-50 flex justify-center pointer-events-none"
           >
             <div
-              className="pointer-events-auto flex items-center gap-1 px-2 py-2 rounded-full"
+              className="pointer-events-auto flex items-center gap-1 px-2 py-1.5 rounded-full"
               style={{
-                background: 'rgba(7, 16, 30, 0.75)',
-                backdropFilter: 'blur(20px)',
-                border: '1px solid rgba(232,238,255,0.1)',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,158,255,0.08)',
+                background: 'rgba(26,26,26,0.85)',
+                backdropFilter: 'blur(16px)',
+                border: '1px solid rgba(214,210,189,0.12)',
+                boxShadow: '0 8px 32px rgba(0,0,0,0.3)',
               }}
             >
-              {/* Logo pill */}
+              {/* Logo in pill */}
               <a
                 href="#home"
-                className="text-xs font-black tracking-tight text-white hover:text-blue-400 transition-colors duration-200 px-3 py-1.5 rounded-full"
-                style={{ color: '#e8eeff' }}
+                className="font-bold text-sm px-3 py-1 rounded-full"
+                style={{ color: '#D6D2BD' }}
               >
-                Ayush<span style={{ color: '#3b9eff' }}>.</span>
+                Ayush<span style={{ color: '#FF611D' }}>.</span>
               </a>
 
-              {/* Divider */}
-              <div className="w-px h-4 mx-1" style={{ background: 'rgba(232,238,255,0.1)' }} />
+              <div className="w-px h-4 mx-1" style={{ background: 'rgba(214,210,189,0.12)' }} />
 
               {/* Nav links */}
               {navLinks.map(link => (
                 <a
                   key={link.id}
                   href={link.href}
-                  className="relative px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-[0.15em] transition-all duration-200"
+                  className="relative px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
                   style={{
-                    color: activeSection === link.id ? '#fff' : 'rgba(232,238,255,0.45)',
-                    background: activeSection === link.id ? 'rgba(59,158,255,0.15)' : 'transparent',
-                  }}
-                  onMouseOver={e => {
-                    if (activeSection !== link.id) e.currentTarget.style.color = '#e8eeff';
-                  }}
-                  onMouseOut={e => {
-                    if (activeSection !== link.id) e.currentTarget.style.color = 'rgba(232,238,255,0.45)';
+                    color: activeSection === link.id ? '#fff' : 'rgba(214,210,189,0.6)',
+                    background: activeSection === link.id ? 'rgba(255,97,29,0.15)' : 'transparent',
                   }}
                 >
                   {link.name}
                   {activeSection === link.id && (
                     <motion.div
-                      layoutId="pill-active-indicator"
+                      layoutId="pill-indicator"
                       className="absolute inset-0 rounded-full"
-                      style={{ background: 'rgba(59,158,255,0.12)', border: '1px solid rgba(59,158,255,0.2)' }}
+                      style={{
+                        background: 'rgba(255,97,29,0.1)',
+                        border: '1px solid rgba(255,97,29,0.25)',
+                      }}
                       transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                     />
                   )}
@@ -156,39 +140,25 @@ export default function Navbar() {
               {/* CTA */}
               <a
                 href="#contact"
-                className="ml-1 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest text-white transition-all duration-200"
+                className="ml-1 px-4 py-1.5 rounded-full text-[11px] font-bold text-white transition-all duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #3b9eff 0%, #5aadff 100%)',
-                  boxShadow: '0 0 15px rgba(59,158,255,0.3)',
-                }}
-                onMouseOver={e => {
-                  e.currentTarget.style.boxShadow = '0 0 25px rgba(59,158,255,0.5)';
-                  e.currentTarget.style.transform = 'scale(1.03)';
-                }}
-                onMouseOut={e => {
-                  e.currentTarget.style.boxShadow = '0 0 15px rgba(59,158,255,0.3)';
-                  e.currentTarget.style.transform = 'scale(1)';
+                  background: '#FF611D',
+                  boxShadow: '0 0 12px rgba(255,97,29,0.3)',
                 }}
               >
                 Let's Talk
               </a>
 
-              {/* Mobile: hamburger inside pill */}
+              {/* Mobile toggle inside pill */}
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                aria-label="Toggle menu"
-                className="md:hidden px-2 py-1.5 transition-colors rounded-full ml-1"
-                style={{ color: 'rgba(232,238,255,0.6)' }}
+                className="md:hidden px-2 py-1 ml-1"
+                style={{ color: '#D6D2BD' }}
+                aria-label="Menu"
               >
-                {menuOpen ? (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                ) : (
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                )}
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
               </button>
             </div>
           </motion.div>
@@ -197,35 +167,40 @@ export default function Navbar() {
 
       {/* Mobile overlay */}
       <div
-        className={`fixed inset-0 z-[99] backdrop-blur-sm transition-opacity duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
-        style={{ background: 'rgba(7, 16, 30, 0.7)' }}
+        className={`fixed inset-0 z-40 transition-opacity duration-300 md:hidden ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+        style={{ background: 'rgba(51,51,51,0.85)', backdropFilter: 'blur(8px)' }}
         onClick={() => setMenuOpen(false)}
       />
 
       {/* Mobile drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 z-[100] flex flex-col px-8 pt-24 pb-12 gap-6 transition-transform duration-300 ease-in-out md:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
-        style={{ background: '#07101e', borderLeft: '1px solid rgba(232,238,255,0.05)' }}
+        className={`fixed top-0 right-0 h-full w-64 z-50 flex flex-col px-8 pt-24 pb-12 gap-6 transition-transform duration-300 md:hidden ${menuOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        style={{ background: '#1a1a1a', borderLeft: '1px solid rgba(214,210,189,0.08)' }}
       >
+        <button
+          onClick={() => setMenuOpen(false)}
+          className="absolute top-6 right-6"
+          style={{ color: '#D6D2BD' }}
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
         {navLinks.map(link => (
           <a
             key={link.id}
             href={link.href}
             onClick={() => setMenuOpen(false)}
-            className="text-sm font-bold uppercase tracking-widest pb-4 transition-colors"
+            className="text-sm font-medium pb-4 transition-colors"
             style={{
-              color: activeSection === link.id ? '#fff' : 'rgba(232,238,255,0.35)',
-              borderBottom: '1px solid rgba(232,238,255,0.05)',
+              color: activeSection === link.id ? '#FF611D' : 'rgba(214,210,189,0.6)',
+              borderBottom: '1px solid rgba(214,210,189,0.06)',
             }}
           >
             {link.name}
           </a>
         ))}
-        <a
-          href="#contact"
-          onClick={() => setMenuOpen(false)}
-          className="btn-primary justify-center mt-4"
-        >
+        <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-primary justify-center mt-4">
           Let's Talk
         </a>
       </div>

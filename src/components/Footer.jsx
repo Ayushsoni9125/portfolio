@@ -1,68 +1,81 @@
+import { motion } from 'framer-motion';
+
 export default function Footer() {
   const year = new Date().getFullYear();
+
+  const links = [
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/ayushsoni2004' },
+    { name: 'GitHub', href: 'https://github.com/Ayushsoni9125' },
+    { name: 'Email', href: 'mailto:soniayush9125@gmail.com?subject=Hello Ayush! I am a visitor from your portfolio' },
+  ];
 
   return (
     <footer
       className="py-10 sm:py-12"
-      style={{ borderTop: '1px solid rgba(232,238,255,0.05)' }}
+      style={{ borderTop: '1px solid rgba(214,210,189,0.08)' }}
     >
-      <div
-        className="section-container flex flex-col sm:flex-row items-center justify-between gap-6"
-      >
-        {/* Brand + availability */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-          <a
-            href="#home"
-            className="text-base font-black tracking-tight text-white hover:text-blue-400 transition-colors duration-200"
-          >
-            Ayush<span style={{ color: '#3b9eff' }}>.</span>
-          </a>
-          <div className="flex items-center gap-2">
-            <div
-              className="w-1.5 h-1.5 rounded-full"
-              style={{
-                background: '#3b9eff',
-                boxShadow: '0 0 6px #3b9eff',
-                animation: 'pulse-glow 2s ease-in-out infinite',
-              }}
-            />
-            <span
-              className="text-[10px] font-bold uppercase tracking-[0.2em]"
-              style={{ color: 'rgba(232,238,255,0.35)' }}
+      <div className="section-container">
+        {/* Divider */}
+        <hr style={{ borderColor: 'rgba(214,210,189,0.08)', marginBottom: '2rem' }} />
+
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+          {/* Left: Brand + tagline */}
+          <div>
+            <a
+              href="#home"
+              className="font-bold text-base tracking-tight mb-1 inline-block"
+              style={{ color: '#D6D2BD' }}
             >
-              Open for collaborations
-            </span>
+              Ayush Soni
+            </a>
+            <p className="text-sm" style={{ color: 'rgba(214,210,189,0.45)' }}>
+              Passionate learner. Innovative developer.
+            </p>
+          </div>
+
+          {/* Right: Links with ↗ arrow */}
+          <div className="flex flex-col gap-2 z-10">
+            {links.map(link => (
+              <div key={link.name} className="flex justify-between items-center group">
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex-1 text-sm transition-colors duration-200 group-hover:text-orange-400"
+                  style={{ color: 'rgba(214,210,189,0.6)' }}
+                >
+                  {link.name}
+                </a>
+                <motion.svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#FF611D"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="ml-2 transition-transform duration-300"
+                  initial={false}
+                  whileHover={{ x: 2, y: -2 }}
+                  style={{ color: '#FF611D' }}
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </motion.svg>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Links + copyright */}
-        <div className="flex flex-col items-center sm:items-end gap-3">
-          <div className="flex gap-6">
-            {[
-              { name: 'GitHub', href: 'https://github.com/Ayushsoni9125' },
-              { name: 'LinkedIn', href: 'https://linkedin.com/in/ayushsoni2004' },
-            ].map(link => (
-              <a
-                key={link.name}
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-200"
-                style={{ color: 'rgba(232,238,255,0.3)' }}
-                onMouseOver={e => e.currentTarget.style.color = '#3b9eff'}
-                onMouseOut={e => e.currentTarget.style.color = 'rgba(232,238,255,0.3)'}
-              >
-                {link.name}
-              </a>
-            ))}
-          </div>
-          <p
-            className="text-[10px] font-bold uppercase tracking-widest"
-            style={{ color: 'rgba(232,238,255,0.15)' }}
-          >
-            Handcrafted with precision © {year}
-          </p>
-        </div>
+        {/* Bottom copyright */}
+        <p
+          className="text-[10px] font-bold uppercase tracking-widest text-center mt-10"
+          style={{ color: 'rgba(214,210,189,0.18)' }}
+        >
+          Handcrafted with precision © {year} Ayush Soni
+        </p>
       </div>
     </footer>
   );

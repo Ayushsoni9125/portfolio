@@ -12,26 +12,17 @@ import ScrollProgress from "./components/ScrollProgress";
 
 export default function App() {
   return (
-    <div className="min-h-screen overflow-x-hidden relative" style={{ background: '#07101e' }}>
+    <div className="min-h-screen overflow-x-hidden" style={{ background: '#333333' }}>
       <ScrollProgress />
       <Navbar />
       <Hero />
-      <div className="relative z-10">
-        <div className="section-divider" />
-        <About />
-        {/* Scroll-driven quote reveal */}
-        <QuoteReveal />
-        {/* Skills marquee banner */}
-        <SkillsMarquee />
-        <div className="section-divider" />
-        <Projects />
-        <div className="section-divider" />
-        <Experience />
-        <div className="section-divider" />
-        <Skills />
-        <div className="section-divider" />
-        <Contact />
-      </div>
+      <About />
+      <QuoteReveal />
+      <SkillsMarquee />
+      <Projects />
+      <Experience />
+      <Skills />
+      <Contact />
       <Footer />
     </div>
   );

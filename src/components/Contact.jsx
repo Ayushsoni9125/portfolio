@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import AnimatedSection, { fadeUp, slideLeft, slideRight } from './ui/AnimatedSection';
-import Card3D from './ui/Card3D';
 
 const SOCIALS = [
   {
@@ -62,11 +61,17 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" className="py-24 sm:py-32" style={{ background: '#333333' }}>
       <div className="section-container">
         <AnimatedSection variants={fadeUp}>
-          <h2 className="section-heading">Contact</h2>
-          <span className="accent-bar" />
+          <div className="flex flex-col items-center justify-center mb-12">
+            <h2 className="font-bold text-3xl uppercase tracking-wide" style={{ color: '#D6D2BD' }}>
+              CONTACT
+            </h2>
+            <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
+              LET'S BUILD SOMETHING
+            </p>
+          </div>
         </AnimatedSection>
 
         <div ref={ref} className="grid lg:grid-cols-2 gap-14 lg:gap-20">
@@ -76,7 +81,7 @@ export default function Contact() {
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
           >
-            <p className="text-lg leading-relaxed mb-8" style={{ color: 'rgba(232,238,255,0.55)' }}>
+            <p className="text-base leading-relaxed mb-8 font-mono" style={{ color: 'rgba(214,210,189,0.55)' }}>
               I'm currently open to freelance work and full-time positions.
               Have a project in mind or want to collaborate? Let's build something great together.
             </p>
@@ -91,9 +96,9 @@ export default function Contact() {
               <div
                 className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-all duration-200 group-hover:scale-110"
                 style={{
-                  background: 'rgba(59,158,255,0.08)',
-                  border: '1px solid rgba(59,158,255,0.15)',
-                  color: '#3b9eff',
+                  background: 'rgba(255,97,29,0.08)',
+                  border: '1px solid rgba(255,97,29,0.2)',
+                  color: '#FF611D',
                 }}
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,8 +107,8 @@ export default function Contact() {
                 </svg>
               </div>
               <span
-                className="font-semibold text-base transition-colors duration-200 break-all group-hover:text-blue-400"
-                style={{ color: '#e8eeff' }}
+                className="font-medium text-base transition-colors duration-200 break-all group-hover:text-orange-400"
+                style={{ color: '#D6D2BD' }}
               >
                 soniayush9125@gmail.com
               </span>
@@ -120,15 +125,15 @@ export default function Contact() {
                   aria-label={social.name}
                   className="w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-200"
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(232,238,255,0.07)',
-                    color: 'rgba(232,238,255,0.4)',
+                    background: 'rgba(214,210,189,0.04)',
+                    border: '1px solid rgba(214,210,189,0.1)',
+                    color: 'rgba(214,210,189,0.45)',
                   }}
                   whileHover={{
                     scale: 1.1,
-                    borderColor: 'rgba(59,158,255,0.3)',
-                    color: '#3b9eff',
-                    backgroundColor: 'rgba(59,158,255,0.06)',
+                    borderColor: 'rgba(255,97,29,0.4)',
+                    color: '#FF611D',
+                    backgroundColor: 'rgba(255,97,29,0.06)',
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -138,13 +143,13 @@ export default function Contact() {
             </div>
           </motion.div>
 
-          {/* Right: form (using 3D card wrapper) */}
+          {/* Right: form */}
           <motion.div
             variants={slideRight}
             initial="hidden"
             animate={inView ? 'visible' : 'hidden'}
           >
-            <Card3D className="glass-panel p-8" intensity={5} glareOpacity={0.05}>
+            <div className="glass-panel p-8">
               <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <input
@@ -187,8 +192,8 @@ export default function Contact() {
                 </motion.button>
                 {success && (
                   <motion.p
-                    className="text-center text-sm font-bold mt-2"
-                    style={{ color: '#3b9eff' }}
+                    className="text-center text-sm font-bold mt-2 font-mono"
+                    style={{ color: '#FF611D' }}
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
@@ -196,7 +201,7 @@ export default function Contact() {
                   </motion.p>
                 )}
               </form>
-            </Card3D>
+            </div>
           </motion.div>
         </div>
       </div>

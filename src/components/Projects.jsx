@@ -13,7 +13,6 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/Shop-Now",
     featured: true,
     bg: "/project_bg_ecommerce.png",
-    accent: '#3b9eff',
   },
   {
     title: "AI Resume Builder",
@@ -24,7 +23,6 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/resume_builder",
     featured: false,
     bg: "/project_bg_resume.png",
-    accent: '#7dc3ff',
   },
   {
     title: "Connectify",
@@ -35,7 +33,6 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125/Connectify",
     featured: false,
     bg: "/project_bg_connectify.png",
-    accent: '#5aadff',
   },
   {
     title: "Banking App",
@@ -46,7 +43,6 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125",
     featured: false,
     bg: "/project_bg_banking.png",
-    accent: '#3b9eff',
   },
   {
     title: "Wedding Platform",
@@ -57,81 +53,66 @@ const PROJECTS = [
     git: "https://github.com/Ayushsoni9125",
     featured: false,
     bg: "/project_bg_wedding.png",
-    accent: '#7dc3ff',
   },
 ];
-
-const GitHubIcon = () => (
-  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-  </svg>
-);
 
 function ProjectCard({ project, index }) {
   const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
-      className="flex-shrink-0 relative rounded-3xl overflow-hidden cursor-pointer group"
-      style={{
-        width: '280px',
-        height: '400px',
-      }}
-      initial={{ opacity: 0, y: 30 }}
+      className="flex-shrink-0 relative rounded-3xl overflow-hidden cursor-pointer"
+      style={{ width: '240px', height: '360px' }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -6, scale: 1.02 }}
+      whileHover={{ y: -6 }}
     >
-      {/* Background image */}
+      {/* BG image */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{ backgroundImage: `url(${project.bg})` }}
-        animate={{ scale: hovered ? 1.08 : 1.0, filter: hovered ? 'blur(0px) brightness(0.7)' : 'blur(2px) brightness(0.5)' }}
-        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        animate={{
+          scale: hovered ? 1.07 : 1.0,
+          filter: hovered ? 'blur(0px) brightness(0.65)' : 'blur(1px) brightness(0.45)',
+        }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       />
 
-      {/* Top gradient overlay */}
+      {/* Top gradient */}
       <div
-        className="absolute inset-x-0 top-0 h-1/2 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%)' }}
+        className="absolute inset-x-0 top-0 h-1/2 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.65) 0%, transparent 100%)' }}
       />
-
-      {/* Bottom gradient overlay */}
+      {/* Bottom gradient */}
       <div
-        className="absolute inset-x-0 bottom-0 h-2/3 pointer-events-none z-10"
-        style={{ background: 'linear-gradient(to top, rgba(7,16,30,0.97) 0%, rgba(7,16,30,0.4) 60%, transparent 100%)' }}
+        className="absolute inset-x-0 bottom-0 h-2/3 z-10 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(26,26,26,0.98) 0%, rgba(26,26,26,0.4) 55%, transparent 100%)' }}
       />
 
-      {/* Top accent line */}
+      {/* Orange top accent line on hover */}
       <motion.div
         className="absolute top-0 left-0 right-0 h-[2px] z-20"
-        style={{ background: `linear-gradient(90deg, transparent, ${project.accent}, transparent)` }}
+        style={{ background: 'linear-gradient(90deg, transparent, #FF611D, transparent)' }}
         animate={{ opacity: hovered ? 1 : 0 }}
         transition={{ duration: 0.3 }}
       />
 
-      {/* Card content */}
+      {/* Content */}
       <div className="absolute inset-0 z-20 p-6 flex flex-col justify-between">
-        {/* Top: category + featured badge */}
+        {/* Top */}
         <div className="flex items-start justify-between">
           <div>
-            <p
-              className="text-[9px] font-black uppercase tracking-[0.2em] mb-1"
-              style={{ color: project.accent }}
-            >
+            <p className="text-[9px] font-black uppercase tracking-[0.2em] font-mono" style={{ color: '#FF611D' }}>
               {project.category}
             </p>
             {project.featured && (
               <motion.span
-                className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded"
-                style={{
-                  background: 'rgba(59,158,255,0.2)',
-                  color: '#3b9eff',
-                  border: '1px solid rgba(59,158,255,0.3)',
-                }}
+                className="text-[8px] font-black uppercase tracking-widest px-2 py-0.5 rounded mt-1 inline-block"
+                style={{ background: 'rgba(255,97,29,0.2)', color: '#FF611D', border: '1px solid rgba(255,97,29,0.3)' }}
                 animate={{ opacity: [0.7, 1, 0.7] }}
                 transition={{ duration: 2, repeat: Infinity }}
               >
@@ -139,35 +120,33 @@ function ProjectCard({ project, index }) {
               </motion.span>
             )}
           </div>
-          {/* GitHub icon */}
           <a
             href={project.git}
             target="_blank"
             rel="noreferrer"
             onClick={e => e.stopPropagation()}
-            className="transition-all duration-200"
-            style={{ color: 'rgba(232,238,255,0.3)' }}
-            onMouseOver={e => e.currentTarget.style.color = '#fff'}
-            onMouseOut={e => e.currentTarget.style.color = 'rgba(232,238,255,0.3)'}
+            className="transition-colors duration-200"
+            style={{ color: 'rgba(214,210,189,0.3)' }}
+            onMouseOver={e => e.currentTarget.style.color = '#D6D2BD'}
+            onMouseOut={e => e.currentTarget.style.color = 'rgba(214,210,189,0.3)'}
           >
-            <GitHubIcon />
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+            </svg>
           </a>
         </div>
 
-        {/* Bottom: title + desc + tags + link */}
+        {/* Bottom */}
         <div>
-          <h3
-            className="text-xl font-black text-white mb-2 leading-tight"
-            style={{ textShadow: '0 2px 10px rgba(0,0,0,0.5)' }}
-          >
+          <h3 className="text-xl font-bold mb-2 leading-tight" style={{ color: '#D6D2BD' }}>
             {project.title}
           </h3>
 
-          {/* Description — only shows on hover */}
+          {/* Description on hover */}
           <motion.p
-            className="text-xs leading-relaxed mb-3"
-            style={{ color: 'rgba(232,238,255,0.65)' }}
-            animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0 }}
+            className="text-xs leading-relaxed mb-3 font-mono"
+            style={{ color: 'rgba(214,210,189,0.6)' }}
+            animate={{ opacity: hovered ? 1 : 0, height: hovered ? 'auto' : 0, marginBottom: hovered ? 12 : 0 }}
             transition={{ duration: 0.3 }}
           >
             {project.desc}
@@ -178,27 +157,20 @@ function ProjectCard({ project, index }) {
             {project.tags.slice(0, 3).map(tag => (
               <span
                 key={tag}
-                className="text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide"
-                style={{
-                  background: 'rgba(255,255,255,0.08)',
-                  border: '1px solid rgba(255,255,255,0.12)',
-                  color: 'rgba(232,238,255,0.6)',
-                }}
+                className="text-[8px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wide font-mono"
+                style={{ background: 'rgba(214,210,189,0.07)', border: '1px solid rgba(214,210,189,0.12)', color: 'rgba(214,210,189,0.6)' }}
               >
                 {tag}
               </span>
             ))}
           </div>
 
-          {/* Live link */}
           <a
             href={project.link}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 text-xs font-bold transition-all duration-200"
-            style={{ color: project.accent }}
-            onMouseOver={e => { e.currentTarget.style.gap = '8px'; }}
-            onMouseOut={e => { e.currentTarget.style.gap = '6px'; }}
+            style={{ color: '#FF611D' }}
           >
             Live Demo <ArrowUpRight size={12} />
           </a>
@@ -220,62 +192,58 @@ export default function Projects() {
     setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10);
   };
 
-  const scroll = (dir) => {
-    if (!carouselRef.current) return;
-    const amount = 320;
-    carouselRef.current.scrollBy({ left: dir === 'left' ? -amount : amount, behavior: 'smooth' });
+  const scroll = dir => {
+    carouselRef.current?.scrollBy({ left: dir === 'left' ? -280 : 280, behavior: 'smooth' });
   };
 
   return (
-    <section id="projects" className="py-24 sm:py-32 overflow-hidden">
+    <section id="projects" className="py-24 sm:py-32 overflow-hidden" style={{ background: '#333333' }}>
       <div className="section-container">
-        {/* Header */}
         <AnimatedSection variants={fadeUp}>
           <div className="flex items-end justify-between flex-wrap gap-4 mb-2">
             <div>
-              <h2 className="section-heading">Projects</h2>
-              <span className="accent-bar" />
+              <h2 className="font-bold text-3xl uppercase tracking-wide" style={{ color: '#D6D2BD' }}>
+                FEATURED PROJECTS
+              </h2>
+              <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
+                EXPLORE MY WORK
+              </p>
             </div>
             <motion.a
               href="https://github.com/Ayushsoni9125"
               target="_blank"
               rel="noreferrer"
               id="projects-view-all"
-              className="text-sm font-bold pb-0.5 transition-colors duration-200"
-              style={{ color: '#3b9eff', borderBottom: '1px solid rgba(59,158,255,0.3)' }}
-              whileHover={{ x: 4 }}
-              transition={{ type: 'spring', stiffness: 400 }}
+              className="text-sm font-medium flex items-center gap-1 transition-colors duration-200"
+              style={{ color: 'rgba(214,210,189,0.55)' }}
+              whileHover={{ color: '#FF611D' }}
             >
-              View All on GitHub →
+              View All on GitHub <ArrowUpRight size={14} />
             </motion.a>
           </div>
         </AnimatedSection>
       </div>
 
-      {/* Carousel — full bleed for overflow */}
+      {/* Carousel */}
       <div className="relative mt-8">
-        {/* Left fade */}
         <div
           className="absolute left-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to right, #07101e, transparent)' }}
+          style={{ background: 'linear-gradient(to right, #333333, transparent)' }}
         />
-        {/* Right fade */}
         <div
           className="absolute right-0 top-0 bottom-0 w-16 z-10 pointer-events-none"
-          style={{ background: 'linear-gradient(to left, #07101e, transparent)' }}
+          style={{ background: 'linear-gradient(to left, #333333, transparent)' }}
         />
 
-        {/* Scrollable container */}
         <div
           ref={carouselRef}
-          className="flex gap-5 overflow-x-auto pb-6 pt-2 px-6 sm:px-16"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex gap-4 overflow-x-auto pb-6 pt-2 px-6 sm:px-16"
+          style={{ scrollbarWidth: 'none' }}
           onScroll={updateScrollState}
         >
           {PROJECTS.map((project, i) => (
             <ProjectCard key={project.title} project={project} index={i} />
           ))}
-          {/* Spacer at end */}
           <div className="flex-shrink-0 w-8" />
         </div>
       </div>
@@ -283,38 +251,28 @@ export default function Projects() {
       {/* Arrow controls */}
       <div className="section-container">
         <div className="flex justify-end gap-3 mt-4">
-          <button
-            onClick={() => scroll('left')}
-            disabled={!canScrollLeft}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30"
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(232,238,255,0.1)',
-              color: 'rgba(232,238,255,0.7)',
-            }}
-            onMouseOver={e => { if (canScrollLeft) { e.currentTarget.style.borderColor = 'rgba(59,158,255,0.4)'; e.currentTarget.style.color = '#3b9eff'; }}}
-            onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(232,238,255,0.1)'; e.currentTarget.style.color = 'rgba(232,238,255,0.7)'; }}
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button
-            onClick={() => scroll('right')}
-            disabled={!canScrollRight}
-            className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30"
-            style={{
-              background: 'rgba(255,255,255,0.05)',
-              border: '1px solid rgba(232,238,255,0.1)',
-              color: 'rgba(232,238,255,0.7)',
-            }}
-            onMouseOver={e => { if (canScrollRight) { e.currentTarget.style.borderColor = 'rgba(59,158,255,0.4)'; e.currentTarget.style.color = '#3b9eff'; }}}
-            onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(232,238,255,0.1)'; e.currentTarget.style.color = 'rgba(232,238,255,0.7)'; }}
-          >
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          {[
+            { dir: 'left', disabled: !canScrollLeft, path: 'M15 19l-7-7 7-7' },
+            { dir: 'right', disabled: !canScrollRight, path: 'M9 5l7 7-7 7' },
+          ].map(({ dir, disabled, path }) => (
+            <button
+              key={dir}
+              onClick={() => scroll(dir)}
+              disabled={disabled}
+              className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30"
+              style={{
+                background: 'rgba(214,210,189,0.06)',
+                border: '1px solid rgba(214,210,189,0.15)',
+                color: 'rgba(214,210,189,0.6)',
+              }}
+              onMouseOver={e => { if (!disabled) { e.currentTarget.style.borderColor = '#FF611D'; e.currentTarget.style.color = '#FF611D'; }}}
+              onMouseOut={e => { e.currentTarget.style.borderColor = 'rgba(214,210,189,0.15)'; e.currentTarget.style.color = 'rgba(214,210,189,0.6)'; }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={path} />
+              </svg>
+            </button>
+          ))}
         </div>
       </div>
     </section>

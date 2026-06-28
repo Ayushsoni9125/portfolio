@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import Card3D from './ui/Card3D';
 import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
 const EXPERTISE = [
@@ -37,7 +36,7 @@ const EXPERTISE = [
   {
     number: "04",
     title: "Cloud Deployment",
-    desc: "Deploying and configuring full-stack apps on Vercel and Render, with environment-based secrets management and cross-domain auth flows.",
+    desc: "Deploying and configuring full-stack apps on Vercel and Render with environment-based secrets management and cross-domain auth flows.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
@@ -59,11 +58,17 @@ export default function Experience() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.1 });
 
   return (
-    <section id="experience" className="py-24 sm:py-32">
+    <section id="experience" className="py-24 sm:py-32" style={{ background: '#333333' }}>
       <div className="section-container">
         <AnimatedSection variants={fadeUp}>
-          <h2 className="section-heading">Expertise</h2>
-          <span className="accent-bar" />
+          <div className="flex flex-col items-center justify-center mb-12">
+            <h2 className="font-bold text-3xl uppercase tracking-wide" style={{ color: '#D6D2BD' }}>
+              EXPERTISE
+            </h2>
+            <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
+              WHAT I DO BEST
+            </p>
+          </div>
         </AnimatedSection>
 
         <div ref={ref} className="grid sm:grid-cols-2 gap-5">
@@ -75,45 +80,34 @@ export default function Experience() {
               initial="hidden"
               animate={inView ? 'visible' : 'hidden'}
             >
-              <Card3D className="expertise-card group h-full" intensity={8} glareOpacity={0.06}>
+              <div
+                className="expertise-card group h-full cursor-default"
+                style={{ transition: 'border-color 0.3s, box-shadow 0.3s' }}
+              >
                 <div className="flex items-start gap-4">
-                  {/* Icon with glow */}
-                  <motion.div
+                  <div
                     className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110"
                     style={{
-                      background: 'rgba(59,158,255,0.08)',
-                      border: '1px solid rgba(59,158,255,0.15)',
-                      color: '#3b9eff',
-                    }}
-                    whileHover={{
-                      boxShadow: '0 0 20px rgba(59,158,255,0.3)',
-                      background: 'rgba(59,158,255,0.15)',
+                      background: 'rgba(255,97,29,0.08)',
+                      border: '1px solid rgba(255,97,29,0.2)',
+                      color: '#FF611D',
                     }}
                   >
                     {item.icon}
-                  </motion.div>
-
+                  </div>
                   <div className="flex-1">
-                    <div
-                      className="text-xs font-black uppercase tracking-[0.25em] mb-1"
-                      style={{ color: 'rgba(59,158,255,0.5)' }}
-                    >
+                    <div className="text-xs font-black uppercase tracking-[0.25em] mb-1 font-mono" style={{ color: 'rgba(255,97,29,0.5)' }}>
                       {item.number}
                     </div>
-                    <h3
-                      className="text-xl font-bold text-white mb-3 group-hover:text-blue-300 transition-colors duration-200"
-                    >
+                    <h3 className="text-xl font-bold mb-3 transition-colors duration-200 group-hover:text-orange-400" style={{ color: '#D6D2BD' }}>
                       {item.title}
                     </h3>
-                    <p
-                      className="text-sm leading-relaxed"
-                      style={{ color: 'rgba(232,238,255,0.5)' }}
-                    >
+                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(214,210,189,0.5)' }}>
                       {item.desc}
                     </p>
                   </div>
                 </div>
-              </Card3D>
+              </div>
             </motion.div>
           ))}
         </div>

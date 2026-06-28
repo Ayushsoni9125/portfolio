@@ -1,109 +1,97 @@
 import { motion } from 'framer-motion';
-import ParticleCanvas from './ParticleCanvas';
 
-const textVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (delay) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1], delay },
-  }),
-};
-
-const floatVariant = {
-  animate: {
-    y: [0, -12, 0],
-    transition: { duration: 5, repeat: Infinity, ease: 'easeInOut' },
-  },
-};
-
-// Animated letter-by-letter span for terminal text
-function AnimatedText({ text, className = '' }) {
+// Animated letter drop for "Hello!"
+function AnimatedHello() {
+  const letters = 'Hello!'.split('');
   return (
-    <span className={className}>
-      {text.split('').map((char, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 + i * 0.04, duration: 0.1 }}
-          style={{ display: 'inline-block', whiteSpace: 'pre' }}
-        >
-          {char}
-        </motion.span>
-      ))}
+    <span
+      className="flex flex-wrap whitespace-pre-wrap relative font-bold py-6"
+      style={{ fontSize: 'clamp(3rem, 9vw, 6rem)', color: '#FF611D' }}
+      aria-label="Hello!"
+    >
+      <span className="sr-only">Hello!</span>
+      <span className="inline-flex overflow-hidden pb-2" aria-hidden="true">
+        {letters.map((char, i) => (
+          <motion.span
+            key={i}
+            className="inline-block"
+            initial={{ y: 60, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              duration: 0.5,
+              delay: 0.2 + i * 0.07,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+          >
+            {char}
+          </motion.span>
+        ))}
+      </span>
     </span>
   );
 }
 
+// macOS terminal/JSON block
 const terminalData = [
   { key: 'name', value: 'Ayush Soni' },
-  { key: 'role', value: 'Full-Stack MERN Developer' },
-  { key: 'focus', value: 'Security & Scalable Systems' },
-  { key: 'stack', value: 'React · Node.js · MongoDB · AWS' },
+  { key: 'career-in-progress', value: 'Software Development' },
+  { key: 'current-focus', value: 'Fullstack Web Developer' },
+  { key: 'stack', value: 'React · Node.js · MongoDB' },
   { key: 'status', value: 'Open to Opportunities 🚀' },
 ];
 
 function TerminalBlock() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.97 }}
+      initial={{ opacity: 0, y: 50, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full max-w-sm xl:max-w-md"
+      transition={{ duration: 0.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full max-w-md"
     >
       <div
         className="rounded-xl overflow-hidden shadow-2xl"
         style={{
-          background: '#1a1a2e',
-          border: '1px solid rgba(59,158,255,0.15)',
-          boxShadow: '0 25px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(59,158,255,0.08)',
+          background: '#1a1a1a',
+          border: '1px solid rgba(214,210,189,0.08)',
+          boxShadow: '0 25px 60px rgba(0,0,0,0.4)',
         }}
       >
-        {/* Title bar */}
+        {/* Traffic lights title bar */}
         <div
           className="flex items-center gap-2 px-4 py-3"
-          style={{ background: '#0f0f1a', borderBottom: '1px solid rgba(255,255,255,0.06)' }}
+          style={{ background: '#111', borderBottom: '1px solid rgba(214,210,189,0.06)' }}
         >
-          {/* Traffic lights */}
           <div className="flex gap-1.5">
             <div className="w-3 h-3 rounded-full" style={{ background: '#FF5F56' }} />
             <div className="w-3 h-3 rounded-full" style={{ background: '#FFBD2E' }} />
             <div className="w-3 h-3 rounded-full" style={{ background: '#27C93F' }} />
           </div>
-          <span
-            className="text-[10px] font-mono ml-2"
-            style={{ color: 'rgba(232,238,255,0.2)' }}
-          >
-            about.json
+          <span className="text-[10px] font-mono ml-2" style={{ color: 'rgba(214,210,189,0.25)' }}>
+            about_me.json
           </span>
         </div>
 
-        {/* Code content */}
+        {/* JSON content */}
         <pre
-          className="p-5 text-sm leading-relaxed font-mono overflow-x-auto"
-          style={{ color: 'rgba(232,238,255,0.75)' }}
+          className="px-5 pt-5 pb-4 text-sm leading-relaxed font-mono overflow-x-auto"
+          style={{ color: 'rgba(214,210,189,0.7)' }}
         >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            <span style={{ color: 'rgba(232,238,255,0.35)' }}>{'{'}</span>{'\n'}
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}>
+            <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'{'}</span>{'\n'}
           </motion.span>
           {terminalData.map(({ key, value }, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 1.0 + i * 0.18, duration: 0.4 }}
+              transition={{ delay: 1.1 + i * 0.15, duration: 0.35 }}
             >
               {'  '}
-              <span style={{ color: 'rgba(125,195,255,0.7)' }}>"{key}"</span>
-              <span style={{ color: 'rgba(232,238,255,0.35)' }}>: </span>
-              <span style={{ color: '#3b9eff', fontWeight: 600 }}>"{value}"</span>
+              <span style={{ color: 'rgba(214,210,189,0.5)' }}>"{key}"</span>
+              <span style={{ color: 'rgba(214,210,189,0.3)' }}>: </span>
+              <span style={{ color: '#FF611D', fontWeight: 600 }}>"{value}"</span>
               {i < terminalData.length - 1 && (
-                <span style={{ color: 'rgba(232,238,255,0.25)' }}>,</span>
+                <span style={{ color: 'rgba(214,210,189,0.25)' }}>,</span>
               )}
               {'\n'}
             </motion.div>
@@ -111,32 +99,25 @@ function TerminalBlock() {
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1.0 + terminalData.length * 0.18 + 0.1 }}
+            transition={{ delay: 1.1 + terminalData.length * 0.15 }}
           >
-            <span style={{ color: 'rgba(232,238,255,0.35)' }}>{'}'}</span>
+            <span style={{ color: 'rgba(214,210,189,0.35)' }}>{'}'}</span>
           </motion.span>
         </pre>
 
-        {/* Blinking cursor row */}
-        <div
-          className="px-5 pb-4 flex items-center gap-2"
-          style={{ color: 'rgba(232,238,255,0.3)' }}
-        >
+        {/* Blinking cursor */}
+        <div className="px-5 pb-4 flex items-center gap-2">
           <span className="font-mono text-xs" style={{ color: '#27C93F' }}>$</span>
           <motion.span
-            className="w-2 h-4 rounded-sm"
-            style={{ background: '#3b9eff' }}
+            className="w-2 h-[14px] rounded-sm"
+            style={{ background: '#FF611D' }}
             animate={{ opacity: [1, 0, 1] }}
             transition={{ duration: 1, repeat: Infinity }}
           />
         </div>
       </div>
-
-      {/* Glow under terminal */}
-      <div
-        className="mx-8 h-4 rounded-b-full blur-lg"
-        style={{ background: 'rgba(59,158,255,0.15)' }}
-      />
+      {/* Subtle shadow glow */}
+      <div className="mx-10 h-3 rounded-b-full blur-md" style={{ background: 'rgba(255,97,29,0.1)' }} />
     </motion.div>
   );
 }
@@ -146,115 +127,54 @@ export default function Hero() {
     <section
       id="home"
       className="relative min-h-screen flex items-center overflow-hidden"
+      style={{ background: '#333333' }}
     >
-      {/* Particle canvas background */}
-      <ParticleCanvas />
-
-      {/* Ambient glows */}
+      {/* Subtle ambient glow */}
       <div className="hero-glow" />
       <div className="hero-glow-2" />
 
-      {/* Decorative 3D floating orbs */}
-      <motion.div
-        variants={floatVariant}
-        animate="animate"
-        className="absolute right-[10%] top-[20%] w-64 h-64 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(59,158,255,0.12) 0%, transparent 70%)',
-          filter: 'blur(30px)',
-        }}
-      />
-      <motion.div
-        animate={{ y: [0, 15, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-        className="absolute left-[5%] bottom-[20%] w-48 h-48 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(125,195,255,0.08) 0%, transparent 70%)',
-          filter: 'blur(25px)',
-        }}
-      />
+      {/* Main content — centered column layout */}
+      <div className="section-container relative z-10 pt-28 pb-20 w-full">
+        <div className="flex flex-col items-center lg:flex-row lg:items-center lg:justify-between gap-12 lg:gap-16">
 
-      {/* Content — two-column layout on lg+ */}
-      <div className="section-container relative z-10 py-32 sm:py-0 w-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-
-          {/* Left: existing hero text */}
-          <div className="flex-1 min-w-0">
-            <motion.p
-              custom={0}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-sm font-bold uppercase tracking-[0.3em] mb-6 flex items-center gap-3"
-              style={{ color: '#3b9eff' }}
-            >
-              <motion.span
-                className="inline-block w-8 h-[2px] rounded-full"
-                style={{ background: '#3b9eff' }}
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              />
-              Full-Stack Developer
-            </motion.p>
-
-            <motion.h1
-              custom={0.15}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="font-black leading-[1.0] tracking-tight mb-6"
-              style={{ fontSize: 'clamp(3rem, 8vw, 6rem)', color: '#fff' }}
-            >
-              Hello, I'm
-              <br />
-              <span className="gradient-text">Ayush.</span>
-            </motion.h1>
+          {/* Left column */}
+          <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+            <AnimatedHello />
 
             <motion.p
-              custom={0.3}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="text-xl sm:text-2xl font-medium mb-10 max-w-lg leading-relaxed"
-              style={{ color: 'rgba(232, 238, 255, 0.55)' }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.85, duration: 0.6 }}
+              className="text-lg sm:text-xl font-medium max-w-md leading-relaxed mb-8"
+              style={{ color: 'rgba(214,210,189,0.65)' }}
             >
               I build high-performance{' '}
-              <span style={{ color: 'rgba(232,238,255,0.9)' }}>MERN ecosystems</span>{' '}
-              with a focus on security, scalability, and cinematic user experiences.
+              <span style={{ color: '#D6D2BD', fontWeight: 600 }}>MERN ecosystems</span>{' '}
+              — scalable, secure, and cinematic.
             </motion.p>
 
             <motion.div
-              custom={0.45}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap items-center gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.6 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-4"
             >
               <a href="#about" id="hero-explore-btn" className="btn-primary group">
                 View my work
-                <svg
-                  className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a href="#contact" id="hero-contact-btn" className="btn-outline">
-                Contact Me
-              </a>
+              <a href="#contact" id="hero-contact-btn" className="btn-outline">Contact Me</a>
             </motion.div>
 
-            {/* Stats row */}
+            {/* Stats */}
             <motion.div
-              custom={0.6}
-              variants={textVariants}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap gap-8 sm:gap-12 mt-16 pt-10"
-              style={{ borderTop: '1px solid rgba(232,238,255,0.06)' }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-8 mt-14 pt-8"
+              style={{ borderTop: '1px solid rgba(214,210,189,0.08)' }}
             >
               {[
                 { value: '5+', label: 'Projects Shipped' },
@@ -263,14 +183,11 @@ export default function Hero() {
               ].map(({ value, label }) => (
                 <motion.div
                   key={label}
-                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileHover={{ y: -2, scale: 1.04 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                 >
-                  <div className="text-2xl font-black text-white mb-0.5">{value}</div>
-                  <div
-                    className="text-[10px] font-bold uppercase tracking-widest"
-                    style={{ color: 'rgba(232,238,255,0.35)' }}
-                  >
+                  <div className="text-xl font-black mb-0.5" style={{ color: '#D6D2BD' }}>{value}</div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest font-mono" style={{ color: 'rgba(214,210,189,0.35)' }}>
                     {label}
                   </div>
                 </motion.div>
@@ -278,34 +195,28 @@ export default function Hero() {
             </motion.div>
           </div>
 
-          {/* Right: Terminal block */}
+          {/* Right column: Terminal block */}
           <div className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:justify-end">
             <TerminalBlock />
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll arrow */}
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.4 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex-col items-center gap-2 hidden sm:flex"
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.8, duration: 0.6 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+          className="text-2xl"
+          style={{ color: '#FF611D' }}
         >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(59,158,255,0.8)" strokeWidth="2">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-          </svg>
+          ↓
         </motion.div>
-        <span
-          className="text-[9px] font-bold uppercase tracking-[0.3em]"
-          style={{ color: 'rgba(232,238,255,0.4)' }}
-        >
-          Scroll
-        </span>
       </motion.div>
     </section>
   );
