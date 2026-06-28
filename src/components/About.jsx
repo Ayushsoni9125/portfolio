@@ -1,36 +1,36 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import profileImg from "../assets/ayush.png";
+import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
-// Timeline data using Ayush's actual journey
+// Timeline built from resume
 const TIMELINE = [
   {
     year: '2025 – Present',
     summary: 'Decided to make 2025 my year to shine',
     items: [
-      '💼 Building production-grade MERN projects',
-      '🏆 AWS Certified AI Practitioner & Cloud Practitioner',
+      '💼 Building production-grade MERN projects (ShopNow, AI Resume Builder, Connectify)',
+      '🏆 AWS Certified AI Practitioner (AIF-C01)',
+      '🏆 AWS Certified Cloud Practitioner (CLF-C02)',
+      '🎯 Top 10 at HackWave 2.0 Hackathon (100+ teams)',
       '🚀 Actively seeking full-time & freelance opportunities',
-      '🎓 B.Tech IT — final year at KIET Group of Institutions',
     ],
   },
   {
-    year: '2023 – 2024',
-    summary: 'Dove deep into full-stack development',
+    year: '2024 – Present',
+    summary: 'Started B.Tech at KIET Group of Institutions, Ghaziabad',
     items: [
+      '🎓 B.Tech in Information Technology — KIET Group of Institutions (2024–2028)',
       '⚡ Mastered the MERN stack end-to-end',
-      '🔐 Learned JWT auth, RBAC, and REST API security',
-      '🏆 Top 10 at HackWave 2.0 hackathon (100+ teams)',
-      '🛠️ Built ShopNow, AI Resume Builder, Connectify',
+      '🔐 Deep-dived into JWT auth, RBAC, REST API security & system design',
+      '🛠️ Built full-stack apps with React 19, Node.js, Express.js, MongoDB',
     ],
   },
   {
-    year: '2022',
-    summary: 'Started my B.Tech journey at KIET',
+    year: '2023',
+    summary: 'Completed Class XII — Dr. Virendra Swarup Public School',
     items: [
-      '👨‍💻 Wrote my first lines of JavaScript and Python',
-      '📚 Discovered my passion for building on the web',
-      '🍕 Balanced coding with real-world responsibilities',
+      '📋 Class XII with 92% — Dr. Virendra Swarup Public School',
+      
     ],
   },
 ];
@@ -80,7 +80,7 @@ function TimelineItem({ item, index }) {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="mb-8 font-medium space-y-1"
+          className="mb-8 space-y-1"
         >
           {item.items.map((line, i) => (
             <motion.div
@@ -101,26 +101,32 @@ function TimelineItem({ item, index }) {
 }
 
 export default function About() {
-  const [lineRef, lineInView] = useInView({ triggerOnce: false, threshold: 0 });
-
   return (
     <section id="about" className="py-24 sm:py-32" style={{ background: '#333333' }}>
       <div className="section-container">
         {/* Section heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex flex-col items-center justify-center mb-16"
-        >
-          <h2 className="font-bold text-3xl tracking-wide uppercase" style={{ color: '#D6D2BD' }}>
-            ABOUT ME
-          </h2>
-          <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
-            CODE.EAT.SLEEP.REPEAT
+        <AnimatedSection variants={fadeUp}>
+          <div className="flex flex-col items-center justify-center mb-16">
+            <h2 className="font-bold text-3xl tracking-wide uppercase" style={{ color: '#D6D2BD' }}>
+              ABOUT ME
+            </h2>
+            <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
+              CODE.EAT.SLEEP.REPEAT
+            </p>
+          </div>
+        </AnimatedSection>
+
+        {/* Bio summary */}
+        <AnimatedSection variants={fadeUp}>
+          <p
+            className="text-base leading-relaxed text-center max-w-2xl mx-auto mb-12 font-mono"
+            style={{ color: 'rgba(214,210,189,0.55)' }}
+          >
+            Information Technology undergraduate with hands-on experience in full-stack development.
+            Skilled in building secure, scalable RESTful APIs and responsive web applications using
+            the MERN stack — with a focus on authentication, data integrity, and system reliability.
           </p>
-        </motion.div>
+        </AnimatedSection>
 
         {/* Timeline */}
         <div className="w-full pt-4">
@@ -129,9 +135,8 @@ export default function About() {
               <TimelineItem key={item.year} item={item} index={i} />
             ))}
 
-            {/* Vertical animated line */}
+            {/* Animated vertical line */}
             <div
-              ref={lineRef}
               className="timeline-line absolute md:left-6 left-4 top-0 overflow-hidden"
               style={{ height: '100%' }}
             >

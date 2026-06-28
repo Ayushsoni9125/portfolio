@@ -31,6 +31,7 @@ export default function Navbar() {
   const navLinks = [
     { name: 'About', href: '#about', id: 'about' },
     { name: 'Projects', href: '#projects', id: 'projects' },
+    { name: 'Resume', href: '/resume.pdf', id: 'resume', external: true },
     { name: 'Contact', href: '#contact', id: 'contact' },
   ];
 
@@ -57,6 +58,8 @@ export default function Navbar() {
                   <a
                     key={link.id}
                     href={link.href}
+                    target={link.external ? "_blank" : undefined}
+                    rel={link.external ? "noreferrer" : undefined}
                     className="nav-link"
                     style={{ color: activeSection === link.id ? '#FF611D' : '#D6D2BD' }}
                   >
@@ -116,6 +119,8 @@ export default function Navbar() {
                 <a
                   key={link.id}
                   href={link.href}
+                  target={link.external ? "_blank" : undefined}
+                  rel={link.external ? "noreferrer" : undefined}
                   className="relative px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200"
                   style={{
                     color: activeSection === link.id ? '#fff' : 'rgba(214,210,189,0.6)',
@@ -190,6 +195,8 @@ export default function Navbar() {
           <a
             key={link.id}
             href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noreferrer" : undefined}
             onClick={() => setMenuOpen(false)}
             className="text-sm font-medium pb-4 transition-colors"
             style={{

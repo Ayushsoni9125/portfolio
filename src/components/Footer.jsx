@@ -6,6 +6,7 @@ export default function Footer() {
   const links = [
     { name: 'LinkedIn', href: 'https://linkedin.com/in/ayushsoni2004' },
     { name: 'GitHub', href: 'https://github.com/Ayushsoni9125' },
+    { name: 'Resume', href: '/resume.pdf' },
     { name: 'Email', href: 'mailto:soniayush9125@gmail.com?subject=Hello Ayush! I am a visitor from your portfolio' },
   ];
 
