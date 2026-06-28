@@ -1,155 +1,118 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { GitHubCalendar } from 'react-github-calendar';
+import profileImg from "../assets/ayush.png";
 import AnimatedSection, { fadeUp } from './ui/AnimatedSection';
 
-// Timeline built from resume
-const TIMELINE = [
-  {
-    year: '2025 – Present',
-    summary: 'Decided to make 2025 my year to shine',
-    items: [
-      '💼 Building production-grade MERN projects (ShopNow, AI Resume Builder, Connectify)',
-      '🏆 AWS Certified AI Practitioner (AIF-C01)',
-      '🏆 AWS Certified Cloud Practitioner (CLF-C02)',
-      '🎯 Top 10 at HackWave 2.0 Hackathon (100+ teams)',
-      '🚀 Actively seeking full-time & freelance opportunities',
-    ],
-  },
-  {
-    year: '2024 – Present',
-    summary: 'Started B.Tech at KIET Group of Institutions, Ghaziabad',
-    items: [
-      '🎓 B.Tech in Information Technology — KIET Group of Institutions (2024–2028)',
-      '⚡ Mastered the MERN stack end-to-end',
-      '🔐 Deep-dived into JWT auth, RBAC, REST API security & system design',
-      '🛠️ Built full-stack apps with React 19, Node.js, Express.js, MongoDB',
-    ],
-  },
-  {
-    year: '2023',
-    summary: 'Completed Class XII — Dr. Virendra Swarup Public School',
-    items: [
-      '📋 Class XII with 92% — Dr. Virendra Swarup Public School',
-      
-    ],
-  },
-];
-
-function TimelineItem({ item, index }) {
+export default function About() {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.15 });
 
-  return (
-    <div ref={ref} className="flex justify-start pt-10 md:pt-28 md:gap-10">
-      {/* Sticky year label (desktop) */}
-      <div className="sticky flex flex-col md:flex-row z-40 items-center top-40 self-start max-w-xs lg:max-w-sm md:w-full">
-        <motion.h3
-          initial={{ opacity: 0, x: -20 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="hidden md:block text-xl md:text-3xl font-bold pl-16"
-          style={{ color: '#D6D2BD' }}
-        >
-          {item.year}
-        </motion.h3>
-      </div>
+  // Custom theme matching Ayush's orange accent color (#FF611D)
+  const orangeTheme = {
+    light: ['#2b2b2b', '#6b2a0c', '#ab4213', '#eb5b1b', '#FF611D'],
+    dark: ['#222222', '#4d1e0a', '#803110', '#b34415', '#FF611D'],
+  };
 
-      {/* Content */}
-      <div className="relative pl-16 pr-4 md:pl-16 w-full">
-        {/* Year on mobile */}
-        <motion.h3
-          initial={{ opacity: 0, y: 10 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="md:hidden block text-2xl mb-4 text-left font-bold"
-          style={{ color: '#D6D2BD' }}
-        >
-          {item.year}
-        </motion.h3>
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-sm font-medium font-mono mb-6"
-          style={{ color: 'rgba(214,210,189,0.55)' }}
-        >
-          {item.summary}
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="mb-8 space-y-1"
-        >
-          {item.items.map((line, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -10 }}
-              animate={inView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-              className="flex items-start text-sm font-mono"
-              style={{ color: 'rgba(214,210,189,0.75)' }}
-            >
-              {line}
-            </motion.div>
-          ))}
-        </motion.div>
-      </div>
-    </div>
-  );
-}
-
-export default function About() {
   return (
     <section id="about" className="py-24 sm:py-32" style={{ background: '#333333' }}>
       <div className="section-container">
-        {/* Section heading */}
-        <AnimatedSection variants={fadeUp}>
-          <div className="flex flex-col items-center justify-center mb-16">
-            <h2 className="font-bold text-3xl tracking-wide uppercase" style={{ color: '#D6D2BD' }}>
-              ABOUT ME
-            </h2>
-            <p className="font-semibold text-base font-mono mt-1" style={{ color: '#FF611D' }}>
-              CODE.EAT.SLEEP.REPEAT
-            </p>
-          </div>
-        </AnimatedSection>
-
-        {/* Bio summary */}
-        <AnimatedSection variants={fadeUp}>
-          <p
-            className="text-base leading-relaxed text-center max-w-2xl mx-auto mb-12 font-mono"
-            style={{ color: 'rgba(214,210,189,0.55)' }}
+        
+        {/* Main 2-column Bio Area */}
+        <div ref={ref} className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 mb-20">
+          
+          {/* Left: Bio Text */}
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="flex-1 text-left"
           >
-            Information Technology undergraduate with hands-on experience in full-stack development.
-            Skilled in building secure, scalable RESTful APIs and responsive web applications using
-            the MERN stack — with a focus on authentication, data integrity, and system reliability.
-          </p>
-        </AnimatedSection>
-
-        {/* Timeline */}
-        <div className="w-full pt-4">
-          <div className="relative max-w-6xl mx-auto pb-20">
-            {TIMELINE.map((item, i) => (
-              <TimelineItem key={item.year} item={item} index={i} />
-            ))}
-
-            {/* Animated vertical line */}
-            <div
-              className="timeline-line absolute md:left-6 left-4 top-0 overflow-hidden"
-              style={{ height: '100%' }}
+            <h2 
+              className="font-bold mb-6 text-white" 
+              style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', fontFamily: "'Fira Code', monospace" }}
             >
-              <motion.div
-                className="timeline-progress absolute inset-x-0 top-0"
-                initial={{ height: 0, opacity: 0 }}
-                whileInView={{ height: '100%', opacity: 1 }}
-                viewport={{ once: false, amount: 0 }}
-                transition={{ duration: 2.5, ease: 'easeOut' }}
+              Hi, I'm Ayush!
+            </h2>
+
+            <p 
+              className="text-lg sm:text-xl font-medium leading-relaxed mb-6"
+              style={{ color: 'rgba(214, 210, 189, 0.9)' }}
+            >
+              An emerging <span style={{ color: '#FF611D' }}>full-stack developer</span> with a passion to <span style={{ color: '#FF611D' }}>learn</span> and a <span style={{ color: '#FF611D' }}>can-do attitude</span>.
+            </p>
+
+            <div className="space-y-4 text-sm sm:text-base leading-relaxed font-mono" style={{ color: 'rgba(214, 210, 189, 0.65)' }}>
+              <p>
+                I am driven by <span style={{ color: '#FF611D' }}>curiosity</span> and a commitment to building impactful software solutions. I thrive on tackling complex problems and finding efficient ways to address them, continuously seeking opportunities to improve my skills.
+              </p>
+              <p>
+                During my time at <span style={{ color: '#FF611D' }}>KIET Group of Institutions</span>, I have had hands-on experience in various technical areas. I enjoy working on diverse projects that require both <span style={{ color: '#FF611D' }}>creativity</span> and <span style={{ color: '#FF611D' }}>technical expertise</span>.
+              </p>
+              <p>
+                I am always eager to embrace new challenges and am dedicated to creating meaningful digital experiences that have a positive impact. My passion for learning and growth fuels my drive to excel in the software engineering field.
+              </p>
+            </div>
+          </motion.div>
+
+          {/* Right: Circular Profile Picture */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
+            className="flex-shrink-0 relative"
+          >
+            <div className="w-64 h-64 sm:w-80 sm:h-80 rounded-full overflow-hidden border-2 border-dashed border-orange-500/30 p-2">
+              <img 
+                src={profileImg} 
+                alt="Ayush Soni" 
+                className="w-full h-full rounded-full object-cover"
+                style={{
+                  filter: 'grayscale(10%) contrast(105%)',
+                  background: '#222'
+                }}
               />
             </div>
-          </div>
+            {/* Subtle glow behind image */}
+            <div className="absolute inset-0 rounded-full bg-orange-500/5 blur-xl -z-10" />
+          </motion.div>
+
         </div>
+
+        {/* GitHub Contributions Section */}
+        <AnimatedSection>
+          <div className="pt-8" style={{ borderTop: '1px solid rgba(214, 210, 189, 0.08)' }}>
+            <h3 
+              className="text-center text-base sm:text-lg font-bold mb-6"
+              style={{ color: '#D6D2BD', fontFamily: "'Fira Code', monospace" }}
+            >
+              My GitHub contributions
+            </h3>
+            
+            {/* Live Interactive GitHub Calendar */}
+            <div className="flex justify-center py-4">
+              <div 
+                className="w-full max-w-4xl overflow-x-auto p-6 rounded-2xl"
+                style={{ 
+                  background: '#1a1a1a', 
+                  border: '1px solid rgba(214, 210, 189, 0.08)',
+                  scrollbarWidth: 'none'
+                }}
+              >
+                <div className="min-w-[760px] flex justify-center">
+                  <GitHubCalendar 
+                    username="Ayushsoni9125" 
+                    theme={orangeTheme}
+                    colorScheme="dark"
+                    fontSize={12}
+                    blockSize={12}
+                    blockMargin={4}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
       </div>
     </section>
   );
